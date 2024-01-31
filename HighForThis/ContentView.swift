@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct ShowGroup: Identifiable {
+    var id = UUID()
+    var date: String
+    var shows: [Show]
+}
+
 struct Show: Identifiable {
     var id = UUID()
     var name: String
@@ -16,20 +22,21 @@ struct Show: Identifiable {
 
 struct ContentView: View {
     @State var shows = [
-        Show(name: "Band of Horses", venue: "The Capitol Theatre", date: "2/2/2024"),
-        Show(name: "Lucius", venue: "Brooklyn Steel", date: "2/3/2024"),
-        Show(name: "Portugal. The Man.", venue: "The Capitol Theatre", date: "2/18/2024"),
-        Show(name: "Zach Bryan", venue: "Prudential Center", date: "2/18/2024"),
-        Show(name: "Drake", venue: "UBS Arena", date: "2/18/2024")
+        Show(name: "Band of Horses", venue: "The Capitol Theatre", date: "2024-02-02"),
+        Show(name: "Lucius", venue: "Brooklyn Steel", date: "2024-02-03"),
+        Show(name: "Portugal. The Man.", venue: "The Capitol Theatre", date: "2024-02-18"),
+        Show(name: "Zach Bryan", venue: "Prudential Center", date: "2024-02-18"),
+        Show(name: "Drake", venue: "UBS Arena", date: "2024-02-18")
     ]
     
     var body: some View {
+        let groups = showGroups()
         
         VStack {
             List {
-                for (date, shows) in showGroups() {
-                    Section(header: Text(date)) {
-                        ForEach(shows) { show in
+                ForEach(groups) { group in
+                    Section(header: Text(group.date)) {
+                        ForEach(group.shows) { show in
                             VStack(alignment: .leading) {
                                 Text(show.name)
                                 Text(show.venue)
@@ -45,12 +52,20 @@ struct ContentView: View {
         }
     }
     
-    func showGroups() -> [String:[Show]] {
-        var dict = [String:[Show]]()
+    func showGroups() -> [ShowGroup] {
+        var dict: [String:ShowGroup] = [:]
         for show in shows {
-            dict[show.date, default: []].append(show)
+            if dict[show.date] == nil {
+                dict[show.date] = ShowGroup(date: show.date, shows: []);
+            }
+            dict[show.date]!.shows.append(show)
         }
-        return dict
+        let sortedKeys = dict.keys.sorted()
+        var byDate: [ShowGroup] = []
+        for key in sortedKeys {
+            byDate.append(dict[key]!)
+        }
+        return byDate
     }
 }
 

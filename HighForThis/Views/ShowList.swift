@@ -4,8 +4,7 @@ struct ShowList: View {
     var body: some View {
         let groups = showGroups()
         
-        VStack {
-            Text("Recommended Shows").font(.title).padding()
+        VStack(alignment: .leading) {
             NavigationSplitView {
                 List {
                     ForEach(groups) { group in
@@ -21,8 +20,7 @@ struct ShowList: View {
                             Text(group.dateFormatted()).foregroundColor(.black).fontWeight(.heavy)
                         }
                     }
-                }
-                .listStyle(InsetListStyle())
+                }.navigationTitle("Recommended")
             } detail: {
                 Text("Select a show")
             // Back button text color

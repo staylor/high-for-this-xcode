@@ -1,19 +1,21 @@
 import SwiftUI
+import CoreLocation
 
 struct ShowDetail: View {
     var show: Show
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(show.dateFormatted()).foregroundColor(.gray).font(.title2)
-            Text(show.name).foregroundColor(.pink).font(.title).padding(.vertical)
-            Text(show.venue).foregroundColor(.gray).font(.title2)
-        }.padding()
+        ScrollView {
+            
+            VStack(alignment: .leading) {
+                Text(show.dateFormatted()).foregroundColor(.gray).font(.title2)
+                Text(show.name).foregroundColor(.pink).font(.title)
+                Text(show.venue.name).foregroundColor(.gray).font(.title2)
+            }
+        }
     }
 }
 
 #Preview {
-    Group {
-        ShowDetail(show: shows[0])
-    }
+    ShowDetail(show: shows[0])
 }

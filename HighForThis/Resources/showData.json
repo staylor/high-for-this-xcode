@@ -1,7 +1,7 @@
 [
-    {"id": 1, "name": "Band of Horses", "venue": "The Capitol Theatre", "date": "2024-02-02"},
-    {"id": 2, "name": "Lucius", "venue": "Brooklyn Steel", "date": "2024-02-03"},
-    {"id": 3, "name": "Portugal. The Man.", "venue": "The Capitol Theatre", "date": "2024-02-18"},
-    {"id": 4, "name": "Zach Bryan", "venue": "Prudential Center", "date": "2024-02-18"},
-    {"id": 5, "name": "Drake", "venue": "UBS Arena", "date": "2024-02-18"}
+    {"id": 1, "name": "Band of Horses", "venue": {"name": "The Capitol Theatre", "address": "149 Westchester Avenue\nPort Chester, NY 10573-4549"}, "date": "2024-02-02"},
+    {"id": 2, "name": "Lucius", "venue": {"name": "Brooklyn Steel", "address": ""}, "date": "2024-02-03"},
+    {"id": 3, "name": "Portugal. The Man.", "venue": {"name": "The Capitol Theatre", "address": "149 Westchester Avenue\nPort Chester, NY 10573-4549"}, "date": "2024-02-18"},
+    {"id": 4, "name": "Zach Bryan", "venue": {"name": "Prudential Center", "address": ""}, "date": "2024-02-18"},
+    {"id": 5, "name": "Drake", "venue": {"name": "UBS Arena", "address": ""}, "date": "2024-02-18"}
 ]

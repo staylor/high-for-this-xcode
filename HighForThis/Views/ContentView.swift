@@ -9,7 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ShowList()
+        TabView {
+            ShowList()
+                .tabItem {
+                    Label("Shows", systemImage: "calendar")
+                }
+            Podcast()
+                .tabItem {
+                    Label("Podcast", systemImage: "mic.circle")
+                }
+            Videos()
+                .tabItem {
+                    Label("Videos", systemImage: "video")
+                }
+                
+                
+                
+        }.accentColor(.pink)
     }
 }
 

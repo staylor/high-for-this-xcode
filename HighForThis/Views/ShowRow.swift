@@ -7,7 +7,7 @@ struct ShowRow: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(show.name).foregroundColor(.pink)
-                Text(show.venue).foregroundColor(.gray)
+                Text(show.venue.name).foregroundColor(.gray)
             }
 
             Spacer()

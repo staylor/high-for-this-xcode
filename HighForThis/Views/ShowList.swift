@@ -1,4 +1,3 @@
-import Foundation
 import SwiftUI
 
 struct ShowList: View {
@@ -13,7 +12,7 @@ struct ShowList: View {
                         Section {
                             ForEach(group.shows) { show in
                                 NavigationLink {
-                                    ShowRow(show: show)
+                                    ShowDetail(show: show)
                                 } label: {
                                     ShowRow(show: show)
                                 }
@@ -26,7 +25,8 @@ struct ShowList: View {
                 .listStyle(InsetListStyle())
             } detail: {
                 Text("Select a show")
-            }
+            // Back button text color
+            }.accentColor(.pink)
         }
     }
     

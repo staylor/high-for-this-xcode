@@ -1,0 +1,7 @@
+[
+    {"id": 1, "name": "Band of Horses", "venue": "The Capitol Theatre", "date": "2024-02-02"},
+    {"id": 2, "name": "Lucius", "venue": "Brooklyn Steel", "date": "2024-02-03"},
+    {"id": 3, "name": "Portugal. The Man.", "venue": "The Capitol Theatre", "date": "2024-02-18"},
+    {"id": 4, "name": "Zach Bryan", "venue": "Prudential Center", "date": "2024-02-18"},
+    {"id": 5, "name": "Drake", "venue": "UBS Arena", "date": "2024-02-18"}
+]

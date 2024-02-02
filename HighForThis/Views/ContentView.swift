@@ -14,7 +14,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Shows", systemImage: "calendar")
                 }
-            Podcast()
+            PodcastList()
                 .tabItem {
                     Label("Podcast", systemImage: "mic.circle")
                 }
@@ -22,9 +22,6 @@ struct ContentView: View {
                 .tabItem {
                     Label("Videos", systemImage: "video")
                 }
-                
-                
-                
         }.accentColor(.pink)
     }
 }

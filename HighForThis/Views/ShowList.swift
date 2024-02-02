@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ShowList: View {
+    var preview = false
+
     var body: some View {
         let groups = showGroups()
         
@@ -11,7 +13,7 @@ struct ShowList: View {
                         Section {
                             ForEach(group.shows) { show in
                                 NavigationLink {
-                                    ShowDetail(show: show)
+                                    ShowDetail(preview: preview, show: show)
                                 } label: {
                                     ShowRow(show: show)
                                 }
@@ -22,9 +24,10 @@ struct ShowList: View {
                     }
                 }.navigationTitle("Recommended")
             } detail: {
-                Text("Select a show")
+                ShowDetail(show: shows[0])
             // Back button text color
-            }.accentColor(.pink)
+            }
+            .accentColor(.pink)
         }
     }
     
@@ -46,5 +49,5 @@ struct ShowList: View {
 }
 
 #Preview {
-    ShowList()
+    ShowList(preview: true)
 }

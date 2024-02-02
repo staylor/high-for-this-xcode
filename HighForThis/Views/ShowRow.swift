@@ -6,7 +6,7 @@ struct ShowRow: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(show.name).foregroundColor(.pink)
+                Text(show.artist.name).foregroundColor(.pink)
                 Text(show.venue.name).foregroundColor(.gray)
             }
 

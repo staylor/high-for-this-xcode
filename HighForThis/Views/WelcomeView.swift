@@ -1,0 +1,147 @@
+//
+//  WelcomeView.swift
+//  Musadora
+//
+//  Created by Rudrank Riyam on 09/03/23.
+//
+
+import SwiftUI
+import MusicKit
+
+// NOTE:- MOST OF THE CODE HERE IS TAKEN FROM THE SAMPLE PROJECT BY APPLE.
+// Using MusicKit to Integrate with Apple Music
+//
+// https://developer.apple.com/documentation/musickit/using_musickit_to_integrate_with_apple_music
+
+struct WelcomeView: View {
+  @Binding var musicAuthorizationStatus: MusicAuthorization.Status
+  @Environment(\.openURL) private var openURL
+
+  var body: some View {
+    ZStack {
+      VStack(spacing: 0) {
+        Spacer()
+
+        Text("High For This")
+          .foregroundColor(.primary)
+          .font(.largeTitle)
+          .bold()
+
+        Text("Music as it happens.")
+          .foregroundColor(.primary)
+          .font(.title2)
+          .multilineTextAlignment(.center)
+          .padding(.bottom)
+
+        Spacer()
+
+        if let secondaryExplanatoryText = self.secondaryExplanatoryText {
+          secondaryExplanatoryText
+            .foregroundColor(.primary)
+            .font(.headline)
+            .multilineTextAlignment(.center)
+            .padding([.horizontal, .bottom])
+        }
+
+        if musicAuthorizationStatus == .notDetermined || musicAuthorizationStatus == .denied {
+          Button(action: handleButtonPressed) {
+            buttonText
+              .font(.headline)
+              .padding(.horizontal)
+              .padding(.vertical, 8)
+          }
+          .buttonStyle(.borderedProminent)
+          .tint(Color.init(red: 14/255, green: 14/238, blue: 45/255))
+          .colorScheme(.dark)
+          .padding(.bottom)
+        }
+      }
+    }
+  }
+
+  private var secondaryExplanatoryText: Text? {
+    var secondaryExplanatoryText: Text?
+    switch musicAuthorizationStatus {
+      case .denied:
+        secondaryExplanatoryText = Text("Please grant High For This access to ")
+        + Text(Image(systemName: "applelogo")) + Text(" Music in Settings.")
+      default:
+        break
+    }
+    return secondaryExplanatoryText
+  }
+
+  private var buttonText: Text {
+    let buttonText: Text
+    switch musicAuthorizationStatus {
+      case .notDetermined:
+        buttonText = Text("Continue")
+      case .denied:
+        buttonText = Text("Open Settings")
+      default:
+        fatalError("No button should be displayed for current authorization status: \(musicAuthorizationStatus).")
+    }
+    return buttonText
+  }
+
+  private func handleButtonPressed() {
+    switch musicAuthorizationStatus {
+      case .notDetermined:
+        Task {
+          let musicAuthorizationStatus = await MusicAuthorization.request()
+          await update(with: musicAuthorizationStatus)
+        }
+      case .denied:
+        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+          openURL(settingsURL)
+        }
+      default:
+        fatalError("No button should be displayed for current authorization status: \(musicAuthorizationStatus).")
+    }
+  }
+
+  @MainActor
+  private func update(with musicAuthorizationStatus: MusicAuthorization.Status) {
+    withAnimation {
+      self.musicAuthorizationStatus = musicAuthorizationStatus
+    }
+  }
+
+  class PresentationCoordinator: ObservableObject {
+    static let shared = PresentationCoordinator()
+
+    private init() {
+      let authorizationStatus = MusicAuthorization.currentStatus
+
+      debugPrint(MusicAuthorization.currentStatus.rawValue)
+
+      musicAuthorizationStatus = authorizationStatus
+      isWelcomeViewPresented = (authorizationStatus != .authorized)
+    }
+
+    @Published var musicAuthorizationStatus: MusicAuthorization.Status {
+      didSet {
+        isWelcomeViewPresented = (musicAuthorizationStatus != .authorized)
+      }
+    }
+
+    @Published var isWelcomeViewPresented: Bool
+  }
+
+  fileprivate struct SheetPresentationModifier: ViewModifier {
+    @StateObject private var presentationCoordinator = PresentationCoordinator.shared
+
+    func body(content: Content) -> some View {
+      content
+        .fullScreenCover(isPresented: $presentationCoordinator.isWelcomeViewPresented) {
+          WelcomeView(musicAuthorizationStatus: $presentationCoordinator.musicAuthorizationStatus)
+        }
+    }
+  }
+}
+
+extension View {
+  func welcomeSheet() -> some View {
+    modifier(WelcomeView.SheetPresentationModifier())
+  }
+}

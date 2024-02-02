@@ -2,7 +2,7 @@ import SwiftUI
 
 struct Show: Hashable, Codable, Identifiable {
     var id: Int
-    var name: String
+    var artist: Performer
     var venue: Venue
     var date: String
     

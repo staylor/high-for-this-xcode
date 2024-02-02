@@ -7,7 +7,9 @@ Storage for model data.
 
 import Foundation
 
-var shows: [Show] = load("showData.json")
+var payload: Payload = load("showData.json")
+var shows = payload.shows
+var podcasts = payload.podcasts
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

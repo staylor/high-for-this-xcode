@@ -1,11 +1,14 @@
 import SwiftUI
 
 struct ShowList: View {
+    @State private var loading = false
     @State private var shows: [Show] = []
 
     var body: some View {
         VStack(alignment: .leading) {
-            if shows.count == 0 {
+            if (loading) {
+                Loading()
+            } else if shows.count == 0 {
                 Text("No recommended shows.")
             } else {
                 NavigationSplitView {
@@ -31,8 +34,15 @@ struct ShowList: View {
                 .accentColor(.pink)
             }
         }.onAppear() {
+            if isPreview {
+                shows = StaticData.shows()
+                return
+            }
+            
+            loading = true
             loadJsonUrl(url: SHOWS_URL) { (shows) in
                 self.shows = shows
+                self.loading = false
             }
         }
     }

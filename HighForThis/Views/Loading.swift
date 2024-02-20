@@ -7,3 +7,7 @@ struct Loading: View {
               .scaleEffect(2.0, anchor: .center)
     }
 }
+
+#Preview {
+    Loading()
+}

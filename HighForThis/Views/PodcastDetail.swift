@@ -10,7 +10,8 @@ struct PodcastDetail: View {
         VStack {
             if orientation.isLandscape {
                 HStack {
-                    Text("horizontal")
+                    playButton
+                    detailText
                 }
             } else {
                 ScrollView {
@@ -18,22 +19,32 @@ struct PodcastDetail: View {
                         Image(systemName: "waveform")
                             .resizable()
                             .frame(width: 80, height: 80)
-                        Text(podcast.title).foregroundColor(.black).font(.title2).fontWeight(.bold).padding(.vertical)
-                        Text(podcast.description).padding(.bottom)
-                        HStack {
-                            Button(action: {
-                                viewModel.toggle(url: podcast.audio)
-                            }) {
-                                Image(systemName: viewModel.isPlaying ? "pause.circle.fill" : "play.circle.fill").resizable()
-                                    .foregroundColor(.pink)
-                                    .frame(width: 50, height: 50)
-                                    .aspectRatio(contentMode: .fit)
-                            }
-                        }
+                        detailText
+                        playButton
                     }.padding()
                 }
             }
+        }.detectOrientation($orientation)
+    }
+    
+    var detailText: some View {
+        VStack(alignment: .leading) {
+            Text(podcast.title).foregroundColor(.black).font(.title2).fontWeight(.bold).padding(.vertical)
+            Text(podcast.description).padding(.bottom)
         }
+    }
+    
+    var playButton: some View {
+        HStack {
+            Button(action: {
+                viewModel.toggle(url: podcast.audio)
+            }) {
+                Image(systemName: viewModel.isPlaying ? "pause.circle.fill" : "play.circle.fill").resizable()
+                    .foregroundColor(.pink)
+                    .frame(width: 50, height: 50)
+                    .aspectRatio(contentMode: .fit)
+            }
+        }.padding(.trailing)
     }
 }
 

@@ -34,6 +34,11 @@ struct PodcastList: View {
                 .accentColor(.pink)
             }
         }.onAppear() {
+            if isPreview {
+                podcasts = StaticData.podcasts()
+                return
+            }
+            
             loading = true
             loadJsonUrl(url: PODCASTS_URL) { (podcasts) in
                 self.podcasts = podcasts

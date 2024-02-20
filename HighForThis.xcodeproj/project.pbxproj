@@ -27,6 +27,7 @@
 		D2A1167E2B82D8FF00CA5EFD /* podcasts.json in Resources */ = {isa = PBXBuildFile; fileRef = D2A1167D2B82D8FF00CA5EFD /* podcasts.json */; };
 		D2A116802B82D91F00CA5EFD /* shows.json in Resources */ = {isa = PBXBuildFile; fileRef = D2A1167F2B82D91F00CA5EFD /* shows.json */; };
 		D2A116822B84020B00CA5EFD /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A116812B84020B00CA5EFD /* Loading.swift */; };
+		D2A116842B842F3700CA5EFD /* StaticData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A116832B842F3700CA5EFD /* StaticData.swift */; };
 		D2A9291C2B6B3ED700480408 /* ShowDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9291B2B6B3ED700480408 /* ShowDetail.swift */; };
 		D2A9291E2B6B403800480408 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9291D2B6B403800480408 /* Helpers.swift */; };
 		D2D50F7E2B6AB472007F335C /* HighForThisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D50F7D2B6AB472007F335C /* HighForThisApp.swift */; };
@@ -76,6 +77,7 @@
 		D2A1167D2B82D8FF00CA5EFD /* podcasts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = podcasts.json; sourceTree = "<group>"; };
 		D2A1167F2B82D91F00CA5EFD /* shows.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shows.json; sourceTree = "<group>"; };
 		D2A116812B84020B00CA5EFD /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
+		D2A116832B842F3700CA5EFD /* StaticData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticData.swift; sourceTree = "<group>"; };
 		D2A9291B2B6B3ED700480408 /* ShowDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetail.swift; sourceTree = "<group>"; };
 		D2A9291D2B6B403800480408 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		D2D50F7A2B6AB472007F335C /* HighForThis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighForThis.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,7 @@
 				D21CC3902B6D7F3F005B2BFC /* Performer.swift */,
 				D29EB7BB2B6D89810093C1DC /* Podcast.swift */,
 				D2A116782B814C5800CA5EFD /* AudioPlayerViewModel.swift */,
+				D2A116832B842F3700CA5EFD /* StaticData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				D22BA11E2B6B38EA0037E129 /* ShowRow.swift in Sources */,
 				D24492F12B6D8E4600DBCC13 /* Main.swift in Sources */,
 				D27C2DDC2B6D4C1D0036F4A9 /* ShowDetailText.swift in Sources */,
+				D2A116842B842F3700CA5EFD /* StaticData.swift in Sources */,
 				D2A9291E2B6B403800480408 /* Helpers.swift in Sources */,
 				D22BA1172B6B37BB0037E129 /* Show.swift in Sources */,
 				D2A116822B84020B00CA5EFD /* Loading.swift in Sources */,

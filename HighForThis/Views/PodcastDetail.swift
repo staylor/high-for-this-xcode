@@ -2,7 +2,6 @@ import SwiftUI
 import AVKit
 
 struct PodcastDetail: View {
-    var preview = false
     var podcast: PodcastEpisode
     @StateObject private var viewModel = AudioPlayerViewModel()
     @State private var orientation = UIDevice.current.orientation
@@ -39,5 +38,5 @@ struct PodcastDetail: View {
 }
 
 #Preview {
-    PodcastDetail(podcast: static_podcasts[0])
+    PodcastDetail(podcast: StaticData.podcasts()[0])
 }

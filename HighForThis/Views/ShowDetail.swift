@@ -3,7 +3,6 @@ import MapKit
 import MusicKit
 
 struct ShowDetail: View {
-    var preview = false
     var show: Show
     @State private var artistArtwork: Artwork? = nil
     @State private var orientation = UIDevice.current.orientation
@@ -19,12 +18,14 @@ struct ShowDetail: View {
                 ScrollView {
                     MapView(name: show.venue.name, coordinates: show.venue.coordinates)
                     HStack(alignment: .top) {
-                        if preview {
+                        if isPreview {
                             Image("sample_artist").resizable().frame(width: 100, height: 100).padding(.horizontal)
                         } else if let artwork = artistArtwork {
                             ArtworkImage(artwork, height: 100).padding(.horizontal)
                         } else {
-                            ProgressView().frame(width: 100, height: 100).padding(.horizontal)
+                            ProgressView().progressViewStyle(CircularProgressViewStyle(tint: .pink))
+                                .frame(width: 100, height: 100)
+                                .padding(.horizontal)
                         }
                         ShowDetailText(show: show)
                     }.padding(.vertical)
@@ -35,7 +36,7 @@ struct ShowDetail: View {
     }
     
     private func artwork() {
-        if preview {
+        if isPreview {
             return
         }
         
@@ -54,5 +55,5 @@ struct ShowDetail: View {
 }
 
 #Preview {
-    ShowDetail(preview: true, show: static_shows[0])
+    ShowDetail(show: StaticData.shows()[0])
 }

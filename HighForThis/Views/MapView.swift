@@ -22,6 +22,9 @@ struct MapView: View {
     }
 }
 
-#Preview {
-    MapView(name: static_shows[0].venue.name, coordinates: static_shows[0].venue.coordinates)
+struct MapView_Previews: PreviewProvider {
+    static var previews: some View {
+        let show = StaticData.shows()[0]
+        MapView(name: show.venue.name, coordinates: show.venue.coordinates)
+    }
 }

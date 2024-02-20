@@ -1,9 +1,6 @@
 import Foundation
 import SwiftUI
 
-var static_shows: [Show] = loadJsonFile("shows.json")
-var static_podcasts: [PodcastEpisode] = loadJsonFile("podcasts.json")
-
 var SHOWS_URL = cdnUrl("ios/shows.json")
 var PODCASTS_URL = cdnUrl("ios/podcasts.json")
 

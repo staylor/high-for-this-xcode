@@ -15,5 +15,5 @@ struct ShowDetailText: View {
 }
 
 #Preview {
-    ShowDetailText(show: static_shows[0])
+    ShowDetailText(show: StaticData.shows()[0])
 }

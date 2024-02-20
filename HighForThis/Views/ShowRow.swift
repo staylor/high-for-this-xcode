@@ -15,9 +15,12 @@ struct ShowRow: View {
     }
 }
 
-#Preview {
-    List {
-        ShowRow(show: static_shows[0])
-        ShowRow(show: static_shows[1])
+struct ShowRow_Previews: PreviewProvider {
+    static var previews: some View {
+        let shows = StaticData.shows()
+        List {
+            ShowRow(show: shows[0])
+            ShowRow(show: shows[1])
+        }
     }
 }

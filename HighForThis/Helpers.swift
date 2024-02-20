@@ -1,6 +1,10 @@
 import Foundation
 import CoreLocation
 
+var isPreview: Bool {
+    return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+}
+
 func parseDate(_ str: String) -> String {
     if str == "" {
         return ""

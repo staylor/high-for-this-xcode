@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "artist": {
+            "name": "Band of Horses",
+            "appleMusicId": "129649188"
+        },
+        "venue": {
+            "name": "The Capitol Theatre",
+            "address": "149 Westchester Avenue\nPort Chester, NY 10573-4549",
+            "coordinates": {
+                "latitude": 41.0014435,
+                "longitude": -73.6654208
+            }
+        },
+        "date": "2024-02-02"
+    },
+    {
+        "id": 2,
+        "artist": {
+            "name": "Lucius",
+            "appleMusicId": "74481783"
+        },
+        "venue": {
+            "name": "Brooklyn Steel",
+            "address": "319 Frost St\nBrooklyn, NY 11222",
+            "coordinates": {
+                "latitude": 40.7193319,
+                "longitude": -73.9387361
+            }
+        },
+        "date": "2024-02-03"
+    },
+    {
+        "id": 3,
+        "artist": {
+            "name": "Portugal. The Man.",
+            "appleMusicId": "167649475"
+        },
+        "venue": {
+            "name": "The Capitol Theatre",
+            "address": "149 Westchester Avenue\nPort Chester, NY 10573-4549",
+            "coordinates": {
+                "latitude": 41.0014435,
+                "longitude": -73.6654208
+            }
+        },
+        "date": "2024-02-18"
+    },
+    {
+        "id": 4,
+        "artist": {
+            "name": "Zach Bryan",
+            "appleMusicId": "1436413980"
+        },
+        "venue": {
+            "name": "Prudential Center",
+            "address": "25 Lafayette St\nNewark, NJ 07102",
+            "coordinates": {
+                "latitude": 40.7330123,
+                "longitude": -74.1720966
+            }
+        },
+        "date": "2024-02-18"
+    },
+    {
+        "id": 5,
+        "artist": {
+            "name": "Drake",
+            "appleMusicId": "271256"
+        },
+        "venue": {
+            "name": "UBS Arena",
+            "address": "2400 Hempstead Turnpike\nElmont, NY 11003",
+            "coordinates": {
+                "latitude": 40.711781,
+                "longitude": -73.7259332
+            }
+        },
+        "date": "2024-02-18"
+    }
+]

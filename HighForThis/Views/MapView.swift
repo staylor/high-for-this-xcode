@@ -23,5 +23,5 @@ struct MapView: View {
 }
 
 #Preview {
-    MapView(name: shows[0].venue.name, coordinates: shows[0].venue.coordinates)
+    MapView(name: static_shows[0].venue.name, coordinates: static_shows[0].venue.coordinates)
 }

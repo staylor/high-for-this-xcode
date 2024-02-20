@@ -16,8 +16,8 @@ struct ShowRow: View {
 }
 
 #Preview {
-    Group {
-        ShowRow(show: shows[0])
-        ShowRow(show: shows[1])
+    List {
+        ShowRow(show: static_shows[0])
+        ShowRow(show: static_shows[1])
     }
 }

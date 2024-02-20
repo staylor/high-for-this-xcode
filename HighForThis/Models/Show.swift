@@ -7,6 +7,6 @@ struct Show: Hashable, Codable, Identifiable {
     var date: String
     
     func dateFormatted() -> String {
-        return parseDate(str: date)
+        return parseDate(date)
     }
 }

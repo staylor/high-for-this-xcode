@@ -3,31 +3,39 @@ import SwiftUI
 struct ShowList: View {
     var preview = false
 
+    @State private var shows: [Show] = []
+
     var body: some View {
-        let groups = showGroups()
-        
         VStack(alignment: .leading) {
-            NavigationSplitView {
-                List {
-                    ForEach(groups) { group in
-                        Section {
-                            ForEach(group.shows) { show in
-                                NavigationLink {
-                                    ShowDetail(preview: preview, show: show)
-                                } label: {
-                                    ShowRow(show: show)
+            if shows.count == 0 {
+                Text("No recommended shows.")
+            } else {
+                NavigationSplitView {
+                    List {
+                        ForEach(showGroups()) { group in
+                            Section {
+                                ForEach(group.shows) { show in
+                                    NavigationLink {
+                                        ShowDetail(preview: preview, show: show)
+                                    } label: {
+                                        ShowRow(show: show)
+                                    }
                                 }
+                            } header: {
+                                Text(group.dateFormatted()).foregroundColor(.black).fontWeight(.heavy)
                             }
-                        } header: {
-                            Text(group.dateFormatted()).foregroundColor(.black).fontWeight(.heavy)
                         }
-                    }
-                }.navigationTitle("Recommended")
-            } detail: {
-                ShowDetail(show: shows[0])
-            // Back button text color
+                    }.navigationTitle("Recommended")
+                } detail: {
+                    ShowDetail(preview: preview, show: shows[0])
+                    // Back button text color
+                }
+                .accentColor(.pink)
             }
-            .accentColor(.pink)
+        }.onAppear() {
+            loadJsonUrl(url: SHOWS_URL) { (shows) in
+                self.shows = shows
+            }
         }
     }
     

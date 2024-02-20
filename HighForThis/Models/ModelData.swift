@@ -1,17 +1,13 @@
-/*
-See the LICENSE.txt file for this sample’s licensing information.
-
-Abstract:
-Storage for model data.
-*/
-
 import Foundation
+import SwiftUI
 
-var payload: Payload = load("showData.json")
-var shows = payload.shows
-var podcasts = payload.podcasts
+var static_shows: [Show] = loadJsonFile("shows.json")
+var static_podcasts: [PodcastEpisode] = loadJsonFile("podcasts.json")
 
-func load<T: Decodable>(_ filename: String) -> T {
+var SHOWS_URL = cdnUrl("ios/shows.json")
+var PODCASTS_URL = cdnUrl("ios/podcasts.json")
+
+func loadJsonFile<T: Decodable>(_ filename: String) -> T {
     let data: Data
 
     guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
@@ -32,3 +28,22 @@ func load<T: Decodable>(_ filename: String) -> T {
         fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
     }
 }
+
+func loadJsonUrl<T: Decodable>(url: String, completion: @escaping ((T) -> ())) {
+    guard let jsonUrl = URL(string: url) else {
+        fatalError("Couldn't load \(url).")
+    }
+
+    URLSession.shared.dataTask(with: jsonUrl) { data, response, error in
+        guard let data = data else { return }
+        do {
+            let payload = try JSONDecoder().decode(T.self, from: data)
+            DispatchQueue.main.async {
+                completion(payload)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }.resume()
+}
+

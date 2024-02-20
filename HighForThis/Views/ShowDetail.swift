@@ -8,7 +8,6 @@ struct ShowDetail: View {
     @State private var artistArtwork: Artwork? = nil
     @State private var orientation = UIDevice.current.orientation
     
-
     var body: some View {
         VStack {
             if orientation.isLandscape {
@@ -55,5 +54,5 @@ struct ShowDetail: View {
 }
 
 #Preview {
-    ShowDetail(preview: true, show: shows[0])
+    ShowDetail(preview: true, show: static_shows[0])
 }

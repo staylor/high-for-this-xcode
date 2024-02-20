@@ -1,7 +1,7 @@
 import Foundation
 import CoreLocation
 
-func parseDate(str: String) -> String {
+func parseDate(_ str: String) -> String {
     if str == "" {
         return ""
     }
@@ -14,4 +14,8 @@ func parseDate(str: String) -> String {
     writer.dateFormat = "MM/dd/yyyy"
     
     return writer.string(from: date!)
+}
+
+func cdnUrl(_ path: String) -> String {
+    return "https://storage.googleapis.com/wonderboymusic/\(path)"
 }

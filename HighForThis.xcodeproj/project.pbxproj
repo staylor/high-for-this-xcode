@@ -15,15 +15,18 @@
 		D22BA11C2B6B38560037E129 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BA11B2B6B38560037E129 /* ModelData.swift */; };
 		D22BA11E2B6B38EA0037E129 /* ShowRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BA11D2B6B38EA0037E129 /* ShowRow.swift */; };
 		D24492ED2B6D8A5A00DBCC13 /* PodcastList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24492EC2B6D8A5A00DBCC13 /* PodcastList.swift */; };
-		D24492EF2B6D8A9900DBCC13 /* Payload.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24492EE2B6D8A9900DBCC13 /* Payload.swift */; };
 		D24492F12B6D8E4600DBCC13 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24492F02B6D8E4600DBCC13 /* Main.swift */; };
 		D278176D2B6BAC8900D44B4D /* Videos.swift in Sources */ = {isa = PBXBuildFile; fileRef = D278176C2B6BAC8900D44B4D /* Videos.swift */; };
 		D278176F2B6BAF8900D44B4D /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D278176E2B6BAF8900D44B4D /* Venue.swift */; };
+		D27817732B810BB900D44B4D /* PodcastDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27817722B810BB900D44B4D /* PodcastDetail.swift */; };
 		D27C2DD82B6C145E0036F4A9 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C2DD72B6C145E0036F4A9 /* MapView.swift */; };
 		D27C2DDA2B6D4B8E0036F4A9 /* DetectOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C2DD92B6D4B8E0036F4A9 /* DetectOrientation.swift */; };
 		D27C2DDC2B6D4C1D0036F4A9 /* ShowDetailText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C2DDB2B6D4C1D0036F4A9 /* ShowDetailText.swift */; };
 		D29EB7BC2B6D89810093C1DC /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29EB7BB2B6D89810093C1DC /* Podcast.swift */; };
-		D2A9291A2B6B3D1800480408 /* showData.json in Resources */ = {isa = PBXBuildFile; fileRef = D2A929192B6B3D1800480408 /* showData.json */; };
+		D2A116792B814C5800CA5EFD /* AudioPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A116782B814C5800CA5EFD /* AudioPlayerViewModel.swift */; };
+		D2A1167E2B82D8FF00CA5EFD /* podcasts.json in Resources */ = {isa = PBXBuildFile; fileRef = D2A1167D2B82D8FF00CA5EFD /* podcasts.json */; };
+		D2A116802B82D91F00CA5EFD /* shows.json in Resources */ = {isa = PBXBuildFile; fileRef = D2A1167F2B82D91F00CA5EFD /* shows.json */; };
+		D2A116822B84020B00CA5EFD /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A116812B84020B00CA5EFD /* Loading.swift */; };
 		D2A9291C2B6B3ED700480408 /* ShowDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9291B2B6B3ED700480408 /* ShowDetail.swift */; };
 		D2A9291E2B6B403800480408 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A9291D2B6B403800480408 /* Helpers.swift */; };
 		D2D50F7E2B6AB472007F335C /* HighForThisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D50F7D2B6AB472007F335C /* HighForThisApp.swift */; };
@@ -61,15 +64,18 @@
 		D22BA11B2B6B38560037E129 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		D22BA11D2B6B38EA0037E129 /* ShowRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowRow.swift; sourceTree = "<group>"; };
 		D24492EC2B6D8A5A00DBCC13 /* PodcastList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastList.swift; sourceTree = "<group>"; };
-		D24492EE2B6D8A9900DBCC13 /* Payload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payload.swift; sourceTree = "<group>"; };
 		D24492F02B6D8E4600DBCC13 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		D278176C2B6BAC8900D44B4D /* Videos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Videos.swift; sourceTree = "<group>"; };
 		D278176E2B6BAF8900D44B4D /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		D27817722B810BB900D44B4D /* PodcastDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetail.swift; sourceTree = "<group>"; };
 		D27C2DD72B6C145E0036F4A9 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		D27C2DD92B6D4B8E0036F4A9 /* DetectOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectOrientation.swift; sourceTree = "<group>"; };
 		D27C2DDB2B6D4C1D0036F4A9 /* ShowDetailText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailText.swift; sourceTree = "<group>"; };
 		D29EB7BB2B6D89810093C1DC /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
-		D2A929192B6B3D1800480408 /* showData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = showData.json; path = Resources/showData.json; sourceTree = "<group>"; };
+		D2A116782B814C5800CA5EFD /* AudioPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewModel.swift; sourceTree = "<group>"; };
+		D2A1167D2B82D8FF00CA5EFD /* podcasts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = podcasts.json; sourceTree = "<group>"; };
+		D2A1167F2B82D91F00CA5EFD /* shows.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shows.json; sourceTree = "<group>"; };
+		D2A116812B84020B00CA5EFD /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		D2A9291B2B6B3ED700480408 /* ShowDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetail.swift; sourceTree = "<group>"; };
 		D2A9291D2B6B403800480408 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		D2D50F7A2B6AB472007F335C /* HighForThis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighForThis.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +129,8 @@
 				D21CC3852B6D6B5A005B2BFC /* WelcomeView.swift */,
 				D24492EC2B6D8A5A00DBCC13 /* PodcastList.swift */,
 				D24492F02B6D8E4600DBCC13 /* Main.swift */,
+				D27817722B810BB900D44B4D /* PodcastDetail.swift */,
+				D2A116812B84020B00CA5EFD /* Loading.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -136,7 +144,7 @@
 				D278176E2B6BAF8900D44B4D /* Venue.swift */,
 				D21CC3902B6D7F3F005B2BFC /* Performer.swift */,
 				D29EB7BB2B6D89810093C1DC /* Podcast.swift */,
-				D24492EE2B6D8A9900DBCC13 /* Payload.swift */,
+				D2A116782B814C5800CA5EFD /* AudioPlayerViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -164,7 +172,8 @@
 		D2D50F7C2B6AB472007F335C /* HighForThis */ = {
 			isa = PBXGroup;
 			children = (
-				D2A929192B6B3D1800480408 /* showData.json */,
+				D2A1167D2B82D8FF00CA5EFD /* podcasts.json */,
+				D2A1167F2B82D91F00CA5EFD /* shows.json */,
 				D2D50F7D2B6AB472007F335C /* HighForThisApp.swift */,
 				D27C2DD92B6D4B8E0036F4A9 /* DetectOrientation.swift */,
 				D22BA1182B6B37C20037E129 /* Models */,
@@ -306,8 +315,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2A116802B82D91F00CA5EFD /* shows.json in Resources */,
 				D2D50F862B6AB474007F335C /* Preview Assets.xcassets in Resources */,
-				D2A9291A2B6B3D1800480408 /* showData.json in Resources */,
+				D2A1167E2B82D8FF00CA5EFD /* podcasts.json in Resources */,
 				D2D50F822B6AB474007F335C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,22 +344,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2D50F802B6AB472007F335C /* ContentView.swift in Sources */,
-				D24492EF2B6D8A9900DBCC13 /* Payload.swift in Sources */,
 				D278176F2B6BAF8900D44B4D /* Venue.swift in Sources */,
 				D22BA11A2B6B37D60037E129 /* ShowGroup.swift in Sources */,
 				D21CC3912B6D7F3F005B2BFC /* Performer.swift in Sources */,
 				D24492ED2B6D8A5A00DBCC13 /* PodcastList.swift in Sources */,
 				D2D50F7E2B6AB472007F335C /* HighForThisApp.swift in Sources */,
 				D27C2DD82B6C145E0036F4A9 /* MapView.swift in Sources */,
+				D27817732B810BB900D44B4D /* PodcastDetail.swift in Sources */,
 				D21CC3862B6D6B5A005B2BFC /* WelcomeView.swift in Sources */,
 				D22BA11E2B6B38EA0037E129 /* ShowRow.swift in Sources */,
 				D24492F12B6D8E4600DBCC13 /* Main.swift in Sources */,
 				D27C2DDC2B6D4C1D0036F4A9 /* ShowDetailText.swift in Sources */,
 				D2A9291E2B6B403800480408 /* Helpers.swift in Sources */,
 				D22BA1172B6B37BB0037E129 /* Show.swift in Sources */,
+				D2A116822B84020B00CA5EFD /* Loading.swift in Sources */,
 				D27C2DDA2B6D4B8E0036F4A9 /* DetectOrientation.swift in Sources */,
 				D22BA1142B6B36E20037E129 /* ShowList.swift in Sources */,
 				D29EB7BC2B6D89810093C1DC /* Podcast.swift in Sources */,
+				D2A116792B814C5800CA5EFD /* AudioPlayerViewModel.swift in Sources */,
 				D22BA11C2B6B38560037E129 /* ModelData.swift in Sources */,
 				D2A9291C2B6B3ED700480408 /* ShowDetail.swift in Sources */,
 				D278176D2B6BAC8900D44B4D /* Videos.swift in Sources */,

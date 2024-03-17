@@ -1,11 +1,12 @@
 import SwiftUI
+import HighForThisAPI
 
 struct ShowGroup: Identifiable {
     var id = UUID()
-    var date: String
-    var shows: [Show]
+    var date: Double
+    var shows: [HighForThisAPI.ShowsQuery.Data.Shows.Edge.Node]
     
     func dateFormatted() -> String {
-        return parseDate(date)
+        return parseDate(date / 1000)
     }
 }

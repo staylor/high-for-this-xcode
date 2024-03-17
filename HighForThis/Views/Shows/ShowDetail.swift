@@ -1,27 +1,31 @@
 import SwiftUI
 import MapKit
-import MusicKit
+import HighForThisAPI
 
 struct ShowDetail: View {
-    var show: Show
-    @State private var artistArtwork: Artwork? = nil
+    var show: HighForThisAPI.ShowsQuery.Data.Shows.Edge.Node
     @State private var orientation = UIDevice.current.orientation
     
     var body: some View {
         VStack {
+            let venue = show.venue.asVenue!
+            let artist = show.artist.asArtist!
             if orientation.isLandscape {
                 HStack {
-                    MapView(name: show.venue.name, coordinates: show.venue.coordinates)
-                    ShowDetailText(show: show)
+                  if let coordinates = venue.coordinates {
+                    MapView(name: show.venue.name, coordinates: coordinates)
+                  }
+                  ShowDetailText(show: show)
                 }
             } else {
                 ScrollView {
-                    MapView(name: show.venue.name, coordinates: show.venue.coordinates)
+                    if let coordinates = venue.coordinates {
+                      MapView(name: show.venue.name, coordinates: coordinates)
+                    }
                     HStack(alignment: .top) {
-                        if isPreview {
-                            Image("sample_artist").resizable().frame(width: 100, height: 100).padding(.horizontal)
-                        } else if let artwork = artistArtwork {
-                            ArtworkImage(artwork, height: 100).padding(.horizontal)
+                        if let artwork = artist.appleMusic!.artwork!.url {
+                            let resized = artwork.replacingOccurrences(of: "{w}", with: "100").replacingOccurrences(of: "{h}", with: "100")
+                            AsyncImage(url: URL(string: resized)).padding(.horizontal)
                         } else {
                             ProgressView().progressViewStyle(CircularProgressViewStyle(tint: .pink))
                                 .frame(width: 100, height: 100)
@@ -32,28 +36,5 @@ struct ShowDetail: View {
                 }
             }
         }.detectOrientation($orientation)
-            .onAppear(perform: artwork)
     }
-    
-    private func artwork() {
-        if isPreview {
-            return
-        }
-        
-        Task {
-            do {
-                let id = MusicItemID(show.artist.appleMusicId)
-                let request = MusicCatalogResourceRequest<MusicKit.Artist>(matching: \.id, equalTo: id)
-                let response = try await request.response()
-                guard let artist = response.items.first else { return }
-                artistArtwork = artist.artwork!
-            } catch {
-                print("Error retrieving artwork: \(error.localizedDescription)")
-            }
-        }
-    }
-}
-
-#Preview {
-    ShowDetail(show: StaticData.shows()[0])
 }

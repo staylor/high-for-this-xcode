@@ -9,19 +9,12 @@ var isPreview: Bool {
     return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
 }
 
-func parseDate(_ str: String) -> String {
-    if str == "" {
-        return ""
-    }
-    
-    let reader = DateFormatter()
-    reader.dateFormat = "yyyy-MM-dd"
-    let date = reader.date(from: str)
-    
+func parseDate(_ unixTime: Double) -> String {
+    let date = Date(timeIntervalSince1970: TimeInterval(unixTime))
     let writer = DateFormatter()
     writer.dateFormat = "MM/dd/yyyy"
     
-    return writer.string(from: date!)
+    return writer.string(from: date)
 }
 
 func cdnUrl(_ path: String) -> String {

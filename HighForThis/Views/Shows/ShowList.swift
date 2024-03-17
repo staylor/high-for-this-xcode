@@ -1,8 +1,9 @@
 import SwiftUI
+import HighForThisAPI
 
 struct ShowList: View {
     @State private var loading = false
-    @State private var shows: [Show] = []
+    @State private var shows: [HighForThisAPI.ShowsQuery.Data.Shows.Edge.Node] = []
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -15,7 +16,7 @@ struct ShowList: View {
                     List {
                         ForEach(showGroups()) { group in
                             Section {
-                                ForEach(group.shows) { show in
+                                ForEach(group.shows, id: \.id) { show in
                                     NavigationLink {
                                         ShowDetail(show: show)
                                     } label: {
@@ -34,21 +35,21 @@ struct ShowList: View {
                 .accentColor(.pink)
             }
         }.onAppear() {
-            if isPreview {
-                shows = StaticData.shows()
-                return
-            }
-            
-            loading = true
-            loadJsonUrl(url: SHOWS_URL) { (shows) in
-                self.shows = shows
+            let query = HighForThisAPI.ShowsQuery()
+            apolloClient.fetch(query: query) { result in
+              guard let data = try? result.get().data else { return }
+                var nodes: [HighForThisAPI.ShowsQuery.Data.Shows.Edge.Node] = []
+                for edge in data.shows!.edges {
+                    nodes.append(edge.node)
+                }
+                self.shows = nodes
                 self.loading = false
             }
         }
     }
     
     func showGroups() -> [ShowGroup] {
-        var dict: [String:ShowGroup] = [:]
+        var dict: [Double:ShowGroup] = [:]
         for show in shows {
             if dict[show.date] == nil {
                 dict[show.date] = ShowGroup(date: show.date, shows: []);

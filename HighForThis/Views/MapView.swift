@@ -1,13 +1,14 @@
 import SwiftUI
 import MapKit
+import HighForThisAPI
 
 struct MapView: View {
     var name: String
-    var coordinates: Coordinates
+    var coordinates: ShowsQuery.Data.Shows.Edge.Node.Venue.AsVenue.Coordinates
     @State private var orientation = UIDevice.current.orientation
 
     var body: some View {
-        let coords = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
+        let coords = CLLocationCoordinate2D(latitude: coordinates.latitude!, longitude: coordinates.longitude!)
         let region = MKCoordinateRegion(
             center: coords,
             span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
@@ -22,9 +23,9 @@ struct MapView: View {
     }
 }
 
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        let show = StaticData.shows()[0]
-        MapView(name: show.venue.name, coordinates: show.venue.coordinates)
-    }
-}
+//struct MapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let show = StaticData.shows()[0]
+//        MapView(name: show.venue.name, coordinates: show.venue.coordinates)
+//    }
+//}

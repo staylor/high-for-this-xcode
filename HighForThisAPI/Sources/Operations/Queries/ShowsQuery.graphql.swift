@@ -7,10 +7,24 @@ public class ShowsQuery: GraphQLQuery {
   public static let operationName: String = "Shows"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query Shows { shows(latest: true, first: 200) { __typename edges { __typename node { __typename id title date artist { __typename id name } venue { __typename id name } } } } }"#
+      #"query Shows($term: String, $taxonomy: String) { shows(latest: true, first: 200, term: $term, taxonomy: $taxonomy) { __typename edges { __typename node { __typename id title date artist { __typename id name } venue { __typename id name } } } } }"#
     ))
 
-  public init() {}
+  public var term: GraphQLNullable<String>
+  public var taxonomy: GraphQLNullable<String>
+
+  public init(
+    term: GraphQLNullable<String>,
+    taxonomy: GraphQLNullable<String>
+  ) {
+    self.term = term
+    self.taxonomy = taxonomy
+  }
+
+  public var __variables: Variables? { [
+    "term": term,
+    "taxonomy": taxonomy
+  ] }
 
   public struct Data: HighForThisAPI.SelectionSet {
     public let __data: DataDict
@@ -20,7 +34,9 @@ public class ShowsQuery: GraphQLQuery {
     public static var __selections: [ApolloAPI.Selection] { [
       .field("shows", Shows?.self, arguments: [
         "latest": true,
-        "first": 200
+        "first": 200,
+        "term": .variable("term"),
+        "taxonomy": .variable("taxonomy")
       ]),
     ] }
 

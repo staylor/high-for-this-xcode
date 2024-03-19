@@ -1,5 +1,5 @@
-query Shows {
-	shows(latest: true, first: 200) {
+query Shows($term: String, $taxonomy: String) {
+	shows(latest: true, first: 200, term: $term, taxonomy: $taxonomy) {
 		edges {
 			node {
 				id

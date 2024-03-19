@@ -10,7 +10,9 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            ShowList()
+            NavigationView {
+                ShowList(title: "Recommended")
+            }
                 .tabItem {
                     Label("Shows", systemImage: "calendar")
                 }

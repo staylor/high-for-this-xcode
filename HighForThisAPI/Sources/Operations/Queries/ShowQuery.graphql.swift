@@ -7,7 +7,7 @@ public class ShowQuery: GraphQLQuery {
   public static let operationName: String = "Show"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query Show($id: ObjID!) { show(id: $id) { __typename id title date artist { __typename id name ... on Artist { appleMusic { __typename id url artwork { __typename url height width } } } } venue { __typename id name ... on Venue { address capacity coordinates { __typename latitude longitude } } } } }"#
+      #"query Show($id: ObjID!) { show(id: $id) { __typename id title date artist { __typename id name slug ... on Artist { appleMusic { __typename id url artwork { __typename url height width } } } } venue { __typename id name slug ... on Venue { address capacity coordinates { __typename latitude longitude } } } } }"#
     ))
 
   public var id: ObjID
@@ -64,11 +64,13 @@ public class ShowQuery: GraphQLQuery {
           .field("__typename", String.self),
           .field("id", HighForThisAPI.ObjID.self),
           .field("name", String.self),
+          .field("slug", String.self),
           .inlineFragment(AsArtist.self),
         ] }
 
         public var id: HighForThisAPI.ObjID { __data["id"] }
         public var name: String { __data["name"] }
+        public var slug: String { __data["slug"] }
 
         public var asArtist: AsArtist? { _asInlineFragment() }
 
@@ -88,6 +90,7 @@ public class ShowQuery: GraphQLQuery {
           public var appleMusic: AppleMusic? { __data["appleMusic"] }
           public var id: HighForThisAPI.ObjID { __data["id"] }
           public var name: String { __data["name"] }
+          public var slug: String { __data["slug"] }
 
           /// Show.Artist.AsArtist.AppleMusic
           ///
@@ -143,11 +146,13 @@ public class ShowQuery: GraphQLQuery {
           .field("__typename", String.self),
           .field("id", HighForThisAPI.ObjID.self),
           .field("name", String.self),
+          .field("slug", String.self),
           .inlineFragment(AsVenue.self),
         ] }
 
         public var id: HighForThisAPI.ObjID { __data["id"] }
         public var name: String { __data["name"] }
+        public var slug: String { __data["slug"] }
 
         public var asVenue: AsVenue? { _asInlineFragment() }
 
@@ -171,6 +176,7 @@ public class ShowQuery: GraphQLQuery {
           public var coordinates: Coordinates? { __data["coordinates"] }
           public var id: HighForThisAPI.ObjID { __data["id"] }
           public var name: String { __data["name"] }
+          public var slug: String { __data["slug"] }
 
           /// Show.Venue.AsVenue.Coordinates
           ///

@@ -51,9 +51,9 @@ func getShow(id: ObjID, completion: @escaping ((ShowData) -> ())) {
     }
 }
 
-func getShowList(completion: @escaping (([ShowGroup]) -> ())) {
-    let query = HighForThisAPI.ShowsQuery()
-    Network.shared.apollo.fetch(query: query, cachePolicy: cachePolicy) { result in    
+func getShowList(term: GraphQLNullable<String> = .null, taxonomy: GraphQLNullable<String> = .null, completion: @escaping (([ShowGroup]) -> ())) {
+    let query = HighForThisAPI.ShowsQuery(term: term, taxonomy: taxonomy)
+    Network.shared.apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
         switch result {
         case.success(let graphQLResult):
             var nodes = [ShowListNode]()

@@ -1,0 +1,34 @@
+query Show($id: ObjID!) {
+    show(id: $id) {
+        id
+        title
+        date
+        artist {
+            id
+            name
+            ... on Artist {
+                appleMusic {
+                    id
+                    url
+                    artwork {
+                        url
+                        height
+                        width
+                    }
+                }
+            }
+        }
+        venue {
+            id
+            name
+            ... on Venue {
+                address
+                capacity
+                coordinates {
+                    latitude
+                    longitude
+                }
+            }
+        }
+    }
+}

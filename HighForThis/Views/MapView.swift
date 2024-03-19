@@ -1,11 +1,9 @@
 import SwiftUI
 import MapKit
-import HighForThisAPI
 
 struct MapView: View {
     var name: String
-    var coordinates: ShowsQuery.Data.Shows.Edge.Node.Venue.AsVenue.Coordinates
-    @State private var orientation = UIDevice.current.orientation
+    var coordinates: ShowVenueCoordinates
 
     var body: some View {
         let coords = CLLocationCoordinate2D(latitude: coordinates.latitude!, longitude: coordinates.longitude!)
@@ -16,10 +14,9 @@ struct MapView: View {
         Map(initialPosition: .region(region)) {
             Marker(name, systemImage: "music.note.house.fill", coordinate: coords)
         }
-        .frame(height: orientation.isPortrait || !orientation.isValidInterfaceOrientation ? 300 : .infinity)
+        .frame(height: 300)
         .mapStyle(.standard(elevation: .automatic))
         .mapControlVisibility(.visible)
-        .detectOrientation($orientation)
     }
 }
 

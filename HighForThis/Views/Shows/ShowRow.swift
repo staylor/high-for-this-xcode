@@ -1,8 +1,7 @@
 import SwiftUI
-import HighForThisAPI
 
 struct ShowRow: View {
-    var show: HighForThisAPI.ShowsQuery.Data.Shows.Edge.Node
+    var show: ShowListNode
 
     var body: some View {
         HStack {

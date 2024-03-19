@@ -8,29 +8,10 @@ query Shows {
 				artist {
 					id
 					name
-					slug
-					... on Artist {
-						appleMusic {
-							id
-							url
-							artwork {
-								url
-							}
-						}
-					}
 				}
 				venue {
 					id
 					name
-					slug
-					... on Venue {
-						address
-						capacity
-						coordinates {
-							latitude
-							longitude
-						}
-					}
 				}
 			}
 		}

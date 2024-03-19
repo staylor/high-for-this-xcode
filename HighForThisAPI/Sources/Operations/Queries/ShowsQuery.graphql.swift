@@ -7,7 +7,7 @@ public class ShowsQuery: GraphQLQuery {
   public static let operationName: String = "Shows"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query Shows { shows(latest: true, first: 200) { __typename edges { __typename node { __typename id title date artist { __typename id name slug ... on Artist { appleMusic { __typename id url artwork { __typename url } } } } venue { __typename id name slug ... on Venue { address capacity coordinates { __typename latitude longitude } } } } } } }"#
+      #"query Shows { shows(latest: true, first: 200) { __typename edges { __typename node { __typename id title date artist { __typename id name } venue { __typename id name } } } } }"#
     ))
 
   public init() {}
@@ -91,70 +91,10 @@ public class ShowsQuery: GraphQLQuery {
               .field("__typename", String.self),
               .field("id", HighForThisAPI.ObjID.self),
               .field("name", String.self),
-              .field("slug", String.self),
-              .inlineFragment(AsArtist.self),
             ] }
 
             public var id: HighForThisAPI.ObjID { __data["id"] }
             public var name: String { __data["name"] }
-            public var slug: String { __data["slug"] }
-
-            public var asArtist: AsArtist? { _asInlineFragment() }
-
-            /// Shows.Edge.Node.Artist.AsArtist
-            ///
-            /// Parent Type: `Artist`
-            public struct AsArtist: HighForThisAPI.InlineFragment {
-              public let __data: DataDict
-              public init(_dataDict: DataDict) { __data = _dataDict }
-
-              public typealias RootEntityType = ShowsQuery.Data.Shows.Edge.Node.Artist
-              public static var __parentType: ApolloAPI.ParentType { HighForThisAPI.Objects.Artist }
-              public static var __selections: [ApolloAPI.Selection] { [
-                .field("appleMusic", AppleMusic?.self),
-              ] }
-
-              public var appleMusic: AppleMusic? { __data["appleMusic"] }
-              public var id: HighForThisAPI.ObjID { __data["id"] }
-              public var name: String { __data["name"] }
-              public var slug: String { __data["slug"] }
-
-              /// Shows.Edge.Node.Artist.AsArtist.AppleMusic
-              ///
-              /// Parent Type: `AppleMusicData`
-              public struct AppleMusic: HighForThisAPI.SelectionSet {
-                public let __data: DataDict
-                public init(_dataDict: DataDict) { __data = _dataDict }
-
-                public static var __parentType: ApolloAPI.ParentType { HighForThisAPI.Objects.AppleMusicData }
-                public static var __selections: [ApolloAPI.Selection] { [
-                  .field("__typename", String.self),
-                  .field("id", String?.self),
-                  .field("url", String?.self),
-                  .field("artwork", Artwork?.self),
-                ] }
-
-                public var id: String? { __data["id"] }
-                public var url: String? { __data["url"] }
-                public var artwork: Artwork? { __data["artwork"] }
-
-                /// Shows.Edge.Node.Artist.AsArtist.AppleMusic.Artwork
-                ///
-                /// Parent Type: `AppleMusicArtwork`
-                public struct Artwork: HighForThisAPI.SelectionSet {
-                  public let __data: DataDict
-                  public init(_dataDict: DataDict) { __data = _dataDict }
-
-                  public static var __parentType: ApolloAPI.ParentType { HighForThisAPI.Objects.AppleMusicArtwork }
-                  public static var __selections: [ApolloAPI.Selection] { [
-                    .field("__typename", String.self),
-                    .field("url", String?.self),
-                  ] }
-
-                  public var url: String? { __data["url"] }
-                }
-              }
-            }
           }
 
           /// Shows.Edge.Node.Venue
@@ -169,56 +109,10 @@ public class ShowsQuery: GraphQLQuery {
               .field("__typename", String.self),
               .field("id", HighForThisAPI.ObjID.self),
               .field("name", String.self),
-              .field("slug", String.self),
-              .inlineFragment(AsVenue.self),
             ] }
 
             public var id: HighForThisAPI.ObjID { __data["id"] }
             public var name: String { __data["name"] }
-            public var slug: String { __data["slug"] }
-
-            public var asVenue: AsVenue? { _asInlineFragment() }
-
-            /// Shows.Edge.Node.Venue.AsVenue
-            ///
-            /// Parent Type: `Venue`
-            public struct AsVenue: HighForThisAPI.InlineFragment {
-              public let __data: DataDict
-              public init(_dataDict: DataDict) { __data = _dataDict }
-
-              public typealias RootEntityType = ShowsQuery.Data.Shows.Edge.Node.Venue
-              public static var __parentType: ApolloAPI.ParentType { HighForThisAPI.Objects.Venue }
-              public static var __selections: [ApolloAPI.Selection] { [
-                .field("address", String?.self),
-                .field("capacity", String?.self),
-                .field("coordinates", Coordinates?.self),
-              ] }
-
-              public var address: String? { __data["address"] }
-              public var capacity: String? { __data["capacity"] }
-              public var coordinates: Coordinates? { __data["coordinates"] }
-              public var id: HighForThisAPI.ObjID { __data["id"] }
-              public var name: String { __data["name"] }
-              public var slug: String { __data["slug"] }
-
-              /// Shows.Edge.Node.Venue.AsVenue.Coordinates
-              ///
-              /// Parent Type: `VenueCoordinates`
-              public struct Coordinates: HighForThisAPI.SelectionSet {
-                public let __data: DataDict
-                public init(_dataDict: DataDict) { __data = _dataDict }
-
-                public static var __parentType: ApolloAPI.ParentType { HighForThisAPI.Objects.VenueCoordinates }
-                public static var __selections: [ApolloAPI.Selection] { [
-                  .field("__typename", String.self),
-                  .field("latitude", Double?.self),
-                  .field("longitude", Double?.self),
-                ] }
-
-                public var latitude: Double? { __data["latitude"] }
-                public var longitude: Double? { __data["longitude"] }
-              }
-            }
           }
         }
       }

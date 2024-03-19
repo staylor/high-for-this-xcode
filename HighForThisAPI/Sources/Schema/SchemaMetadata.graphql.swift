@@ -23,8 +23,6 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
   public static func objectType(forTypename typename: String) -> ApolloAPI.Object? {
     switch typename {
     case "Query": return HighForThisAPI.Objects.Query
-    case "ShowConnection": return HighForThisAPI.Objects.ShowConnection
-    case "ShowEdge": return HighForThisAPI.Objects.ShowEdge
     case "Show": return HighForThisAPI.Objects.Show
     case "Artist": return HighForThisAPI.Objects.Artist
     case "Category": return HighForThisAPI.Objects.Category
@@ -35,6 +33,8 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "AppleMusicData": return HighForThisAPI.Objects.AppleMusicData
     case "AppleMusicArtwork": return HighForThisAPI.Objects.AppleMusicArtwork
     case "VenueCoordinates": return HighForThisAPI.Objects.VenueCoordinates
+    case "ShowConnection": return HighForThisAPI.Objects.ShowConnection
+    case "ShowEdge": return HighForThisAPI.Objects.ShowEdge
     default: return nil
     }
   }

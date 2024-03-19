@@ -18,7 +18,6 @@
 		D278176F2B6BAF8900D44B4D /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D278176E2B6BAF8900D44B4D /* Venue.swift */; };
 		D27817732B810BB900D44B4D /* PodcastDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27817722B810BB900D44B4D /* PodcastDetail.swift */; };
 		D27C2DD82B6C145E0036F4A9 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C2DD72B6C145E0036F4A9 /* MapView.swift */; };
-		D27C2DDA2B6D4B8E0036F4A9 /* DetectOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C2DD92B6D4B8E0036F4A9 /* DetectOrientation.swift */; };
 		D27C2DDC2B6D4C1D0036F4A9 /* ShowDetailText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27C2DDB2B6D4C1D0036F4A9 /* ShowDetailText.swift */; };
 		D29EB7BC2B6D89810093C1DC /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29EB7BB2B6D89810093C1DC /* Podcast.swift */; };
 		D2A116792B814C5800CA5EFD /* AudioPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A116782B814C5800CA5EFD /* AudioPlayerViewModel.swift */; };
@@ -47,6 +46,7 @@
 		D2D50F902B6AB474007F335C /* HighForThisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D50F8F2B6AB474007F335C /* HighForThisTests.swift */; };
 		D2D50F9A2B6AB474007F335C /* HighForThisUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D50F992B6AB474007F335C /* HighForThisUITests.swift */; };
 		D2D50F9C2B6AB474007F335C /* HighForThisUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D50F9B2B6AB474007F335C /* HighForThisUITestsLaunchTests.swift */; };
+		D2FCA4DD2BA923BF007A6EFC /* ShowArtistArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FCA4DC2BA923BF007A6EFC /* ShowArtistArtwork.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +68,7 @@
 
 /* Begin PBXFileReference section */
 		D21CC3902B6D7F3F005B2BFC /* Performer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Performer.swift; sourceTree = "<group>"; };
-		D22BA1132B6B36E20037E129 /* ShowList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowList.swift; sourceTree = "<group>"; };
+		D22BA1132B6B36E20037E129 /* ShowList.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ShowList.swift; sourceTree = "<group>"; tabWidth = 4; };
 		D22BA1162B6B37BB0037E129 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		D22BA1192B6B37D60037E129 /* ShowGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowGroup.swift; sourceTree = "<group>"; };
 		D22BA11D2B6B38EA0037E129 /* ShowRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowRow.swift; sourceTree = "<group>"; };
@@ -78,7 +78,6 @@
 		D278176E2B6BAF8900D44B4D /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		D27817722B810BB900D44B4D /* PodcastDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetail.swift; sourceTree = "<group>"; };
 		D27C2DD72B6C145E0036F4A9 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		D27C2DD92B6D4B8E0036F4A9 /* DetectOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectOrientation.swift; sourceTree = "<group>"; };
 		D27C2DDB2B6D4C1D0036F4A9 /* ShowDetailText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailText.swift; sourceTree = "<group>"; };
 		D29EB7BB2B6D89810093C1DC /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		D2A116782B814C5800CA5EFD /* AudioPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewModel.swift; sourceTree = "<group>"; };
@@ -104,6 +103,7 @@
 		D2D50F952B6AB474007F335C /* HighForThisUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HighForThisUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D50F992B6AB474007F335C /* HighForThisUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighForThisUITests.swift; sourceTree = "<group>"; };
 		D2D50F9B2B6AB474007F335C /* HighForThisUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighForThisUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D2FCA4DC2BA923BF007A6EFC /* ShowArtistArtwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowArtistArtwork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +175,7 @@
 				D22BA11D2B6B38EA0037E129 /* ShowRow.swift */,
 				D2A9291B2B6B3ED700480408 /* ShowDetail.swift */,
 				D27C2DDB2B6D4C1D0036F4A9 /* ShowDetailText.swift */,
+				D2FCA4DC2BA923BF007A6EFC /* ShowArtistArtwork.swift */,
 			);
 			path = Shows;
 			sourceTree = "<group>";
@@ -222,7 +223,6 @@
 			children = (
 				D2CBDD112B8947BD00F4437D /* graphql */,
 				D2D50F812B6AB474007F335C /* Assets.xcassets */,
-				D27C2DD92B6D4B8E0036F4A9 /* DetectOrientation.swift */,
 				D2A9291D2B6B403800480408 /* Helpers.swift */,
 				D2D50F832B6AB474007F335C /* HighForThis.entitlements */,
 				D2D50F7D2B6AB472007F335C /* HighForThisApp.swift */,
@@ -420,6 +420,7 @@
 				D2A116882B84374900CA5EFD /* SkeletonSection.swift in Sources */,
 				D2A116862B8436A400CA5EFD /* SkeletonRow.swift in Sources */,
 				D2CBDD082B89438500F4437D /* ApolloClient.swift in Sources */,
+				D2FCA4DD2BA923BF007A6EFC /* ShowArtistArtwork.swift in Sources */,
 				D278176F2B6BAF8900D44B4D /* Venue.swift in Sources */,
 				D22BA11A2B6B37D60037E129 /* ShowGroup.swift in Sources */,
 				D21CC3912B6D7F3F005B2BFC /* Performer.swift in Sources */,
@@ -434,7 +435,6 @@
 				D2A9291E2B6B403800480408 /* Helpers.swift in Sources */,
 				D22BA1172B6B37BB0037E129 /* Show.swift in Sources */,
 				D2A116822B84020B00CA5EFD /* Loading.swift in Sources */,
-				D27C2DDA2B6D4B8E0036F4A9 /* DetectOrientation.swift in Sources */,
 				D22BA1142B6B36E20037E129 /* ShowList.swift in Sources */,
 				D29EB7BC2B6D89810093C1DC /* Podcast.swift in Sources */,
 				D2A116792B814C5800CA5EFD /* AudioPlayerViewModel.swift in Sources */,

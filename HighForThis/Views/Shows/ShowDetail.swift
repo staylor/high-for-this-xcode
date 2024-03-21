@@ -3,58 +3,56 @@ import HighForThisAPI
 
 struct ShowDetail: View {
     var id: ObjID
-    @State private var loading = false
     @State private var show: ShowData?
     
     var body: some View {
-        VStack(alignment: .leading) {
-            if (loading) {
+        VStack {
+            if (show == nil) {
+                // Required to make the spinner align in the center
+                Spacer()
                 Loading()
-            } else if (show != nil) {
-                let venue = show!.venue.asVenue!
-                let artist = show!.artist.asArtist!
-                ScrollView {
-                    if let artwork = artist.appleMusic?.artwork {
-                        ShowArtistArtwork(artwork: artwork)
-                    }
-                    VStack(alignment: .leading) {
-                        Text(parseDate(show!.date / 1000)).foregroundColor(.black).font(.title3).fontWeight(.bold)
-                        Spacer()
-                        NavigationLink {
-                            ArtistShows(name: show!.artist.name, slug: show!.artist.slug)
-                        } label: {
-                            Text(show!.artist.name).foregroundColor(.pink).font(.title)
-                        }
-                        Spacer()
-                        NavigationLink {
-                            VenueShows(name: show!.venue.name, slug: show!.venue.slug)
-                        } label: {
-                            Text(show!.venue.name).foregroundColor(.black).font(.title2)
-                        }
-                        if let address = venue.address {
-                            Text(address).foregroundColor(.gray)
-                        }
-                    }.frame(maxWidth: .infinity, alignment: .leading).padding()
-                    if let coordinates = venue.coordinates {
-                      MapView(name: show!.venue.name, coordinates: coordinates)
+            } else {
+                let show = show!
+                if let artwork = show.artist.asArtist?.appleMusic?.artwork {
+                    ArtistArtwork(
+                        url: artwork.url!,
+                        width: artwork.width!,
+                        height: artwork.height!
+                    )
+                }
+                TextBlock {
+                    Text(parseDate(show.date)).foregroundColor(.black).font(.title3).fontWeight(.bold)
+                    
+                    NavigationLink(show.artist.name) {
+                        ArtistMain(name: show.artist.name, slug: show.artist.slug)
+                    }.foregroundColor(.pink).font(.title).padding(.bottom)
+                    
+                    NavigationLink(show.venue.name) {
+                        VenueMain(name: show.venue.name, slug: show.venue.slug)
+                    }.foregroundColor(.black).font(.title2)
+                    
+                    if let address = show.venue.asVenue?.address {
+                        Text(address).foregroundColor(.gray)
                     }
                 }
             }
+            // Required to make the full bleed image stay at the top
             Spacer()
         }
+        .toolbarBackground(.hidden, for: .navigationBar)
+        .ignoresSafeArea()
         .onAppear() {
             getShow(id: id) { show in
                 self.show = show
-                self.loading = false
             }
         }
     }
 }
 
 #Preview {
-    NavigationView {
+    AppWrapper {
         ShowDetail(id: PREVIEW_SHOW_ID)
     }
-    // color of back button
-    .accentColor(.pink)
 }
+
+let PREVIEW_SHOW_ID = ObjID("5a3d8330bf3bd82f73a5ffab")

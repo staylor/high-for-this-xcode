@@ -2,68 +2,76 @@ import Foundation
 import Apollo
 import HighForThisAPI
 
-var PREVIEW_SHOW_ID = ObjID("5a3d8330bf3bd82f73a5ffab")
-
 let cachePolicy: CachePolicy = .returnCacheDataElseFetch
 
-struct Network {
-    static var shared = Network()
-    
-    private(set) lazy var apollo: ApolloClient = {
-        let client = URLSessionClient()
-        let cache = InMemoryNormalizedCache()
-        let url = URL(string: "https://graphql.highforthis.com/graphql")
-        
-        let store = ApolloStore(cache: cache)
-        let provider = DefaultInterceptorProvider(client: client, store: store)
-        let transport = RequestChainNetworkTransport(interceptorProvider: provider, endpointURL: url!)
-        
-        return ApolloClient(networkTransport: transport, store: store)
-    }()
-}
-
+typealias ArtistData = HighForThisAPI.ArtistQuery.Data
+typealias ArtistShowNode = ArtistData.Shows.Edge.Node
+typealias PodcastListNode = HighForThisAPI.PodcastsQuery.Data.Podcasts.Edge.Node
+typealias PodcastData = HighForThisAPI.PodcastQuery.Data.Podcast
 typealias ShowListNode = HighForThisAPI.ShowsQuery.Data.Shows.Edge.Node
 typealias ShowData = HighForThisAPI.ShowQuery.Data.Show
-typealias ShowVenueCoordinates = HighForThisAPI.ShowQuery.Data.Show.Venue.AsVenue.Coordinates
+typealias VenueData = HighForThisAPI.VenueQuery.Data
 
-func showGroups(_ nodes: [ShowListNode]) -> [ShowGroup] {
-    var dict: [Double:ShowGroup] = [:]
-    for show in nodes {
-        if dict[show.date] == nil {
-            dict[show.date] = ShowGroup(date: show.date, shows: []);
+func getData<Query: GraphQLQuery>(_ query: Query, completion: @escaping ((Query.Data) -> ())) {
+    print("\(Query.operationName) is being fetched.")
+    Network.shared.apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
+        switch result {
+        case.success(let graphQLResult):
+            completion(graphQLResult.data!);
+        case .failure(let error):
+            print("Query failed: \(error)")
         }
-        dict[show.date]!.shows.append(show)
     }
-    let sortedKeys = dict.keys.sorted()
-    var byDate: [ShowGroup] = []
-    for key in sortedKeys {
-        byDate.append(dict[key]!)
+}
+
+func getArtist(slug: String, completion: @escaping ((ArtistData) -> ())) {
+    let query = HighForThisAPI.ArtistQuery(slug: slug)
+    getData(query) { data in
+        completion(data)
     }
-    return byDate
+}
+
+func getVenue(slug: String, completion: @escaping ((VenueData) -> ())) {
+    let query = HighForThisAPI.VenueQuery(slug: slug)
+    getData(query) { data in
+        completion(data)
+    }
 }
 
 func getShow(id: ObjID, completion: @escaping ((ShowData) -> ())) {
     let query = HighForThisAPI.ShowQuery(id: id)
-    Network.shared.apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
-        guard let data = try? result.get().data else { return }
-
-        completion(data.show!);
+    getData(query) { data in
+        completion(data.show!)
     }
 }
 
-func getShowList(term: GraphQLNullable<String> = .null, taxonomy: GraphQLNullable<String> = .null, completion: @escaping (([ShowGroup]) -> ())) {
-    let query = HighForThisAPI.ShowsQuery(term: term, taxonomy: taxonomy)
-    Network.shared.apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
-        switch result {
-        case.success(let graphQLResult):
-            var nodes = [ShowListNode]()
-            for edge in graphQLResult.data!.shows!.edges {
-                nodes.append(edge.node)
-            }
-            
-            completion(showGroups(nodes));
-        case .failure(_):
-            completion([])
+func getShowList(completion: @escaping (([ShowListNode]) -> ())) {
+    let query = HighForThisAPI.ShowsQuery()
+    getData(query) { data in
+        var nodes = [ShowListNode]()
+        for edge in data.shows!.edges {
+            nodes.append(edge.node)
         }
+        
+        completion(nodes);
+    }
+}
+
+func getPodcast(id: ObjID, completion: @escaping ((PodcastData) -> ())) {
+    let query = HighForThisAPI.PodcastQuery(id: id)
+    getData(query) { data in
+        completion(data.podcast!)
+    }
+}
+
+func getPodcasts(completion: @escaping (([PodcastListNode]) -> ())) {
+    let query = HighForThisAPI.PodcastsQuery()
+    getData(query) { data in
+        var nodes = [PodcastListNode]()
+        for edge in data.podcasts!.edges {
+            nodes.append(edge.node)
+        }
+        
+        completion(nodes);
     }
 }

@@ -1,53 +1,48 @@
 import SwiftUI
 
+var PODCASTS_URL = cdnUrl("ios/podcasts.json")
+
 struct PodcastList: View {
-    @State var loading = false
-    @State var podcasts = [PodcastEpisode]()
+    @State var podcasts: [PodcastListNode]?
 
     var body: some View {
         VStack(alignment: .leading) {
-            if loading {
+            if podcasts == nil {
+                Spacer()
                 Loading()
-            } else if podcasts.count == 0 {
+            } else if podcasts!.count == 0 {
                 Text("No podcast episodes.")
             } else {
-                NavigationSplitView {
-                    List {
-                        ForEach(podcasts) { podcast in
-                            NavigationLink {
-                                PodcastDetail(podcast: podcast)
-                            } label: {
-                                HStack {
-                                    Image(systemName: "waveform")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                    Text(podcast.title)
-                                }
+                TextBlock {
+                    Text("Podcast Episodes").font(.title).fontWeight(.black)
+                }
+                List {
+                    ForEach(podcasts!, id: \.self) { podcast in
+                        NavigationLink {
+                            PodcastDetail(id: podcast.id)
+                        } label: {
+                            HStack {
+                                Image(systemName: "waveform")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                Text(podcast.title)
                             }
                         }
-                    }.navigationTitle("Podcast Episodes")
-                } detail: {
-                    // iPad initial view
-                    PodcastDetail(podcast: podcasts[0])
-                }
-                // Back button text color
-                .accentColor(.pink)
+                    }
+                }.listStyle(.plain)
             }
+            Spacer()
         }.onAppear() {
-            if isPreview {
-                podcasts = StaticData.podcasts()
-                return
-            }
-            
-            loading = true
-            loadJsonUrl(url: PODCASTS_URL) { (podcasts) in
-                self.podcasts = podcasts
-                self.loading = false
+            getPodcasts() { nodes in
+                self.podcasts = nodes
             }
         }
+        
     }
 }
 
 #Preview {
-    PodcastList()
+    AppWrapper {
+        PodcastList()
+    }
 }

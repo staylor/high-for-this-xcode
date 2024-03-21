@@ -6,6 +6,6 @@ struct ShowGroup: Identifiable {
     var shows: [ShowListNode]
     
     func dateFormatted() -> String {
-        return parseDate(date / 1000)
+        return parseDate(date)
     }
 }

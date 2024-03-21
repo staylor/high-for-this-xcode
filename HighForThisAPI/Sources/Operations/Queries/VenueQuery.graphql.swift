@@ -3,14 +3,20 @@
 
 @_exported import ApolloAPI
 
-public class ShowsQuery: GraphQLQuery {
-  public static let operationName: String = "Shows"
+public class VenueQuery: GraphQLQuery {
+  public static let operationName: String = "Venue"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query Shows { shows(latest: true, first: 200) { __typename edges { __typename node { __typename id title date artist { __typename id name } venue { __typename id name } } } } }"#
+      #"query Venue($slug: String!) { venue: term(slug: $slug, taxonomy: "venue") { __typename id name slug ... on Venue { address capacity coordinates { __typename latitude longitude } } } shows(latest: true, first: 200, term: $slug, taxonomy: "venue") { __typename edges { __typename node { __typename id title date artist { __typename id name } venue { __typename id name } } } } }"#
     ))
 
-  public init() {}
+  public var slug: String
+
+  public init(slug: String) {
+    self.slug = slug
+  }
+
+  public var __variables: Variables? { ["slug": slug] }
 
   public struct Data: HighForThisAPI.SelectionSet {
     public let __data: DataDict
@@ -18,13 +24,84 @@ public class ShowsQuery: GraphQLQuery {
 
     public static var __parentType: ApolloAPI.ParentType { HighForThisAPI.Objects.Query }
     public static var __selections: [ApolloAPI.Selection] { [
+      .field("term", alias: "venue", Venue?.self, arguments: [
+        "slug": .variable("slug"),
+        "taxonomy": "venue"
+      ]),
       .field("shows", Shows?.self, arguments: [
         "latest": true,
-        "first": 200
+        "first": 200,
+        "term": .variable("slug"),
+        "taxonomy": "venue"
       ]),
     ] }
 
+    public var venue: Venue? { __data["venue"] }
     public var shows: Shows? { __data["shows"] }
+
+    /// Venue
+    ///
+    /// Parent Type: `Term`
+    public struct Venue: HighForThisAPI.SelectionSet {
+      public let __data: DataDict
+      public init(_dataDict: DataDict) { __data = _dataDict }
+
+      public static var __parentType: ApolloAPI.ParentType { HighForThisAPI.Interfaces.Term }
+      public static var __selections: [ApolloAPI.Selection] { [
+        .field("__typename", String.self),
+        .field("id", HighForThisAPI.ObjID.self),
+        .field("name", String.self),
+        .field("slug", String.self),
+        .inlineFragment(AsVenue.self),
+      ] }
+
+      public var id: HighForThisAPI.ObjID { __data["id"] }
+      public var name: String { __data["name"] }
+      public var slug: String { __data["slug"] }
+
+      public var asVenue: AsVenue? { _asInlineFragment() }
+
+      /// Venue.AsVenue
+      ///
+      /// Parent Type: `Venue`
+      public struct AsVenue: HighForThisAPI.InlineFragment {
+        public let __data: DataDict
+        public init(_dataDict: DataDict) { __data = _dataDict }
+
+        public typealias RootEntityType = VenueQuery.Data.Venue
+        public static var __parentType: ApolloAPI.ParentType { HighForThisAPI.Objects.Venue }
+        public static var __selections: [ApolloAPI.Selection] { [
+          .field("address", String?.self),
+          .field("capacity", String?.self),
+          .field("coordinates", Coordinates?.self),
+        ] }
+
+        public var address: String? { __data["address"] }
+        public var capacity: String? { __data["capacity"] }
+        public var coordinates: Coordinates? { __data["coordinates"] }
+        public var id: HighForThisAPI.ObjID { __data["id"] }
+        public var name: String { __data["name"] }
+        public var slug: String { __data["slug"] }
+
+        /// Venue.AsVenue.Coordinates
+        ///
+        /// Parent Type: `VenueCoordinates`
+        public struct Coordinates: HighForThisAPI.SelectionSet {
+          public let __data: DataDict
+          public init(_dataDict: DataDict) { __data = _dataDict }
+
+          public static var __parentType: ApolloAPI.ParentType { HighForThisAPI.Objects.VenueCoordinates }
+          public static var __selections: [ApolloAPI.Selection] { [
+            .field("__typename", String.self),
+            .field("latitude", Double?.self),
+            .field("longitude", Double?.self),
+          ] }
+
+          public var latitude: Double? { __data["latitude"] }
+          public var longitude: Double? { __data["longitude"] }
+        }
+      }
+    }
 
     /// Shows
     ///

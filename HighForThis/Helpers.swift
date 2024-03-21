@@ -2,15 +2,16 @@ import Foundation
 import CoreLocation
 import SwiftUI
 
-var SHOWS_URL = cdnUrl("ios/shows.json")
-var PODCASTS_URL = cdnUrl("ios/podcasts.json")
-
 var isPreview: Bool {
     return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
 }
 
+var staticAssetsHost: String {
+    return ProcessInfo.processInfo.environment["STATIC_ASSETS_HOST"]!
+}
+
 func parseDate(_ unixTime: Double) -> String {
-    let date = Date(timeIntervalSince1970: TimeInterval(unixTime))
+    let date = Date(timeIntervalSince1970: TimeInterval(unixTime / 1000))
     let writer = DateFormatter()
     writer.dateFormat = "MM/dd/yyyy"
     
@@ -18,7 +19,7 @@ func parseDate(_ unixTime: Double) -> String {
 }
 
 func cdnUrl(_ path: String) -> String {
-    return "https://storage.googleapis.com/wonderboymusic/\(path)"
+    return "\(staticAssetsHost)/\(path)"
 }
 
 func loadJsonFile<T: Decodable>(_ filename: String) -> T {

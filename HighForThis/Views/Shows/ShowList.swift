@@ -3,66 +3,73 @@ import HighForThisAPI
 
 struct ShowList: View {
     var title: String
-    var artistSlug: String = ""
-    var venueSlug: String = ""
-    @State private var loading = false
-    @State private var showGroups: [ShowGroup] = []
+    @State private var groups: [ShowGroup]?
 
     var body: some View {
-        VStack(alignment: .leading) {
-            if (loading) {
+        ZStack {
+            if (groups == nil) {
                 Loading()
-            } else if showGroups.count == 0 {
+            } else if groups!.count == 0 {
                 Text("No recommended shows.")
             } else {
-                List {
-                    ForEach(showGroups) { group in
-                        Section {
-                            ForEach(group.shows, id: \.id) { show in
-                                NavigationLink {
-                                    ShowDetail(id: show.id)
-                                } label: {
-                                    HStack {
-                                        VStack(alignment: .leading) {
-                                            Text(show.artist.name).foregroundColor(.pink)
-                                            Text(show.venue.name).foregroundColor(.gray)
+                VStack(alignment: .leading) {
+                    TextBlock {
+                        Text(title).font(.title).fontWeight(.black)
+                    }
+                    List {
+                        ForEach(groups!) { group in
+                            Section {
+                                ForEach(group.shows, id: \.self) { show in
+                                    NavigationLink {
+                                        ShowDetail(id: show.id)
+                                    } label: {
+                                        HStack {
+                                            VStack(alignment: .leading) {
+                                                Text(show.artist.name).foregroundColor(.pink)
+                                                Text(show.venue.name).foregroundColor(.gray)
+                                            }
+                                            
+                                            Spacer()
                                         }
-
-                                        Spacer()
                                     }
                                 }
+                            } header: {
+                                Text(group.dateFormatted())
+                                    .foregroundColor(.black)
+                                    .fontWeight(.bold)
                             }
-                        } header: {
-                            Text(group.dateFormatted())
-                                .foregroundColor(.black)
-                                .fontWeight(.heavy)
                         }
-                    }
-                }.navigationTitle(title)
+                    }.listStyle(.plain)
+                    Spacer()
+                }
             }
-            Spacer()
         }
         .onAppear() {
-            var taxonomy: GraphQLNullable<String> = .none
-            var term: GraphQLNullable<String> = .none
-            if artistSlug != "" {
-                taxonomy = "artist"
-                term = .some(artistSlug)
-            } else if venueSlug != "" {
-                taxonomy = "venue"
-                term = .some(venueSlug)
-            }
-            getShowList(term: term, taxonomy: taxonomy) { groups in
-                self.showGroups = groups
-                self.loading = false
+            getShowList() { nodes in
+                self.groups = showGroups(nodes)
             }
         }
     }
-  
+    
+    func showGroups(_ nodes: [ShowListNode]) -> [ShowGroup] {
+        var dict: [Double:ShowGroup] = [:]
+        for show in nodes {
+            if dict[show.date] == nil {
+                dict[show.date] = ShowGroup(date: show.date, shows: []);
+            }
+            dict[show.date]!.shows.append(show)
+        }
+        let sortedKeys = dict.keys.sorted()
+        var byDate: [ShowGroup] = []
+        for key in sortedKeys {
+            byDate.append(dict[key]!)
+        }
+        return byDate
+    }
 }
 
 #Preview {
-    NavigationView {
-        ShowList(title: "Recommended")
-    }.accentColor(.pink)
+    AppWrapper {
+        ShowList(title: "Recommended Shows")
+    }
 }

@@ -47,6 +47,8 @@ class AudioPlayerViewModel: ObservableObject {
     }
     
     func toggle(url: String) {
+        print("Toggling audio: \(url)")
+        
         if (audioPlayer == nil) {
             activateSession()
         } else if isPlaying {

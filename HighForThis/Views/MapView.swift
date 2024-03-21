@@ -3,16 +3,17 @@ import MapKit
 
 struct MapView: View {
     var name: String
-    var coordinates: ShowVenueCoordinates
+    var latitude: Double
+    var longitude: Double
 
     var body: some View {
-        let coords = CLLocationCoordinate2D(latitude: coordinates.latitude!, longitude: coordinates.longitude!)
+        let coords = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let region = MKCoordinateRegion(
             center: coords,
             span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         )
         Map(initialPosition: .region(region)) {
-            Marker(name, systemImage: "music.note.house.fill", coordinate: coords)
+            Marker(name, systemImage: "music.note.house.fill", coordinate: coords).tint(Color.pink)
         }
         .frame(height: 300)
         .mapStyle(.standard(elevation: .automatic))
@@ -20,9 +21,9 @@ struct MapView: View {
     }
 }
 
-//struct MapView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let show = StaticData.shows()[0]
-//        MapView(name: show.venue.name, coordinates: show.venue.coordinates)
-//    }
-//}
+#Preview {
+    VStack(alignment: .leading) {
+        MapView(name: "Brooklyn Steel", latitude:  40.7193319, longitude: -73.9387361)
+        Spacer()
+    }.ignoresSafeArea()
+}

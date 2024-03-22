@@ -12,9 +12,10 @@ typealias ShowListNode = HighForThisAPI.ShowsQuery.Data.Shows.Edge.Node
 typealias ShowData = HighForThisAPI.ShowQuery.Data.Show
 typealias VenueData = HighForThisAPI.VenueQuery.Data
 typealias VideoData = HighForThisAPI.VideoQuery.Data.Video
+typealias VideosData = HighForThisAPI.VideosQuery.Data.Videos
 typealias VideoListNode = HighForThisAPI.VideosQuery.Data.Videos.Edge.Node
 
-func getData<Query: GraphQLQuery>(_ query: Query, completion: @escaping ((Query.Data) -> ())) {
+func getData<Query: GraphQLQuery>(_ query: Query, cachePolicy: CachePolicy = cachePolicy, completion: @escaping ((Query.Data) -> ())) {
     print("\(Query.operationName) is being fetched.")
     Network.shared.apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
         switch result {
@@ -85,14 +86,9 @@ func getVideo(slug: String, completion: @escaping ((VideoData) -> ())) {
     }
 }
 
-func getVideos(after: GraphQLNullable<String>, first: GraphQLNullable<Int>, year: GraphQLNullable<Int>, completion: @escaping (([VideoListNode]) -> ())) {
+func getVideos(after: GraphQLNullable<String>, first: GraphQLNullable<Int>, year: GraphQLNullable<Int>, completion: @escaping ((VideosData) -> ())) {
     let query = HighForThisAPI.VideosQuery(after: after, first: first, year: year)
     getData(query) { data in
-        var nodes = [VideoListNode]()
-        for edge in data.videos!.edges {
-            nodes.append(edge.node)
-        }
-        
-        completion(nodes);
+        completion(data.videos!);
     }
 }

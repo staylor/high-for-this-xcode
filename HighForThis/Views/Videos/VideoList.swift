@@ -3,53 +3,82 @@ import HighForThisAPI
 import CachedAsyncImage
 
 struct VideoList: View {
-    @State var videos: [VideoListNode]?
+    @Namespace var topID
+    @State private var year: Int = 0
+    @StateObject var model = VideoListModel()
     
     var body: some View {
         VStack(alignment: .leading) {
-            if videos == nil {
+            if model.videos == nil {
                 Spacer()
                 Loading()
-            } else if videos!.count == 0 {
+            } else if model.videos!.count == 0 {
                 Text("No videos.")
             } else {
-                TextBlock {
-                    Text("Videos").font(.title).fontWeight(.black)
-                }
-                List {
-                    ForEach(videos!, id: \.self) { video in
-                        Button(action: {
-                            let url = URL(string: "https://www.youtube.com/watch?v=\(video.dataId)")
-                            UIApplication.shared.open(url!)
-                        }, label: {
-                            HStack {
-                                Paragraph(video.title).padding(.trailing).font(.caption)
-                                let _ = print(video.thumbnails)
-                                if let thumb = video.thumbnails.first(where: {$0.width != 0}) {
-                                    let url = URL(string: thumb.url)
-                                    Spacer()
-                                    CachedAsyncImage(url: url) { image in
-                                        image.resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 100).mask(Rectangle().padding(.vertical, 8))
-                                    }  placeholder: {
-                                        ImageLoading().frame(width: 100)
-                                    }
+                ScrollViewReader { proxy in
+                    TextBlock {
+                        HStack {
+                            Button(action: {
+                                withAnimation {
+                                    proxy.scrollTo(topID)
+                                }
+                            }, label: {
+                                Text("Videos")
+                                    .font(.title)
+                                    .foregroundColor(.black)
+                                    .fontWeight(.black)
+                            })
+                            Spacer()
+
+                            Picker("Filter by year", selection: $year) {
+                                Text("Filter by year").tag(0)
+                                ForEach(model.connection!.years!, id: \.self) {
+                                    Text(String($0)).tag($0)
                                 }
                             }
-                        })
+                            .pickerStyle(.menu)
+                            .onChange(of: year) {
+                                model.fetchYear(year)
+                            }
+                        }
                     }
-                }.listStyle(.plain)
+                    List {
+                        EmptyView().id(topID)
+                        ForEach(model.videos!, id: \.self) { video in
+                            Button(action: {
+                                let url = URL(string: "youtube://v/\(video.dataId)")
+                                UIApplication.shared.open(url!)
+                            }, label: {
+                                HStack {
+                                    Paragraph(video.title).padding(.trailing).font(.caption)
+                                    if let thumb = video.thumbnails.first(where: {$0.width != 0}) {
+                                        let url = URL(string: thumb.url)
+                                        Spacer()
+                                        CachedAsyncImage(url: url) { image in
+                                            image.resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(width: 100).mask(Rectangle().padding(.vertical, 8))
+                                        }  placeholder: {
+                                            ImageLoading().frame(width: 100)
+                                        }
+                                    }
+                                }
+                            })
+                        }
+                        if model.connection!.pageInfo.hasNextPage!  {
+                            Button(action: {
+                                model.fetchCursor()
+                            }, label: {
+                                Text("Load More")
+                            }).foregroundColor(.pink)
+                        }
+                    }.listStyle(.plain)
+                }
             }
             Spacer()
-        }.onAppear() {
-            let after: GraphQLNullable<String> = .none
-            let first: GraphQLNullable<Int> = 10
-            let year: GraphQLNullable<Int> = .none
-            
-            getVideos(after: after, first: first, year: year) { nodes in
-                self.videos = nodes
-            }
+        }
+        .onAppear() {
+            model.fetchData()
         }
     }
 }

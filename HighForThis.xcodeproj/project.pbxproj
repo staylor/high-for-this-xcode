@@ -36,6 +36,7 @@
 		D2E6441F2BAC86D0001B5DC2 /* Paragraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6441E2BAC86D0001B5DC2 /* Paragraph.swift */; };
 		D2E644222BAC8C0D001B5DC2 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = D2E644212BAC8C0D001B5DC2 /* CachedAsyncImage */; };
 		D2E644252BAD3ADB001B5DC2 /* ImageLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E644242BAD3ADB001B5DC2 /* ImageLoading.swift */; };
+		D2E644272BADDC45001B5DC2 /* VideoListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E644262BADDC45001B5DC2 /* VideoListModel.swift */; };
 		D2FCA4DF2BA97196007A6EFC /* ArtistMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FCA4DE2BA97196007A6EFC /* ArtistMain.swift */; };
 		D2FCA4E12BA975C3007A6EFC /* VenueMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FCA4E02BA975C3007A6EFC /* VenueMain.swift */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,7 @@
 		D2E6441C2BABE478001B5DC2 /* Stripes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stripes.swift; sourceTree = "<group>"; };
 		D2E6441E2BAC86D0001B5DC2 /* Paragraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paragraph.swift; sourceTree = "<group>"; };
 		D2E644242BAD3ADB001B5DC2 /* ImageLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoading.swift; sourceTree = "<group>"; };
+		D2E644262BADDC45001B5DC2 /* VideoListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListModel.swift; sourceTree = "<group>"; };
 		D2FCA4DE2BA97196007A6EFC /* ArtistMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistMain.swift; sourceTree = "<group>"; };
 		D2FCA4E02BA975C3007A6EFC /* VenueMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueMain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				D278176C2B6BAC8900D44B4D /* VideoList.swift */,
+				D2E644262BADDC45001B5DC2 /* VideoListModel.swift */,
 			);
 			path = Videos;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				D2E6441F2BAC86D0001B5DC2 /* Paragraph.swift in Sources */,
 				D2A9291C2B6B3ED700480408 /* ShowDetail.swift in Sources */,
 				D278176D2B6BAC8900D44B4D /* VideoList.swift in Sources */,
+				D2E644272BADDC45001B5DC2 /* VideoListModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,7 +1,5 @@
 import SwiftUI
 
-var PODCASTS_URL = cdnUrl("ios/podcasts.json")
-
 struct PodcastList: View {
     @State var podcasts: [PodcastListNode]?
 

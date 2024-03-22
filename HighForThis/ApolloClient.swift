@@ -11,6 +11,8 @@ typealias PodcastData = HighForThisAPI.PodcastQuery.Data.Podcast
 typealias ShowListNode = HighForThisAPI.ShowsQuery.Data.Shows.Edge.Node
 typealias ShowData = HighForThisAPI.ShowQuery.Data.Show
 typealias VenueData = HighForThisAPI.VenueQuery.Data
+typealias VideoData = HighForThisAPI.VideoQuery.Data.Video
+typealias VideoListNode = HighForThisAPI.VideosQuery.Data.Videos.Edge.Node
 
 func getData<Query: GraphQLQuery>(_ query: Query, completion: @escaping ((Query.Data) -> ())) {
     print("\(Query.operationName) is being fetched.")
@@ -69,6 +71,25 @@ func getPodcasts(completion: @escaping (([PodcastListNode]) -> ())) {
     getData(query) { data in
         var nodes = [PodcastListNode]()
         for edge in data.podcasts!.edges {
+            nodes.append(edge.node)
+        }
+        
+        completion(nodes);
+    }
+}
+
+func getVideo(slug: String, completion: @escaping ((VideoData) -> ())) {
+    let query = HighForThisAPI.VideoQuery(slug: slug)
+    getData(query) { data in
+        completion(data.video!)
+    }
+}
+
+func getVideos(after: GraphQLNullable<String>, first: GraphQLNullable<Int>, year: GraphQLNullable<Int>, completion: @escaping (([VideoListNode]) -> ())) {
+    let query = HighForThisAPI.VideosQuery(after: after, first: first, year: year)
+    getData(query) { data in
+        var nodes = [VideoListNode]()
+        for edge in data.videos!.edges {
             nodes.append(edge.node)
         }
         

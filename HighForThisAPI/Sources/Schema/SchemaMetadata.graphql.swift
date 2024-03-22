@@ -23,6 +23,11 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
   public static func objectType(forTypename typename: String) -> ApolloAPI.Object? {
     switch typename {
     case "Query": return HighForThisAPI.Objects.Query
+    case "Video": return HighForThisAPI.Objects.Video
+    case "VideoThumbnail": return HighForThisAPI.Objects.VideoThumbnail
+    case "VideoConnection": return HighForThisAPI.Objects.VideoConnection
+    case "VideoEdge": return HighForThisAPI.Objects.VideoEdge
+    case "PageInfo": return HighForThisAPI.Objects.PageInfo
     case "Podcast": return HighForThisAPI.Objects.Podcast
     case "AudioUpload": return HighForThisAPI.Objects.AudioUpload
     case "FileUpload": return HighForThisAPI.Objects.FileUpload

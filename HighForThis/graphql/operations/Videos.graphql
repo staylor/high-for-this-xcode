@@ -1,0 +1,26 @@
+query Videos(
+  $after: String
+  $first: Int
+  $year: Int
+) {
+	videos(after: $after, first: $first, year: $year) {
+		edges {
+			cursor
+			node {
+				dataId
+				id
+				slug
+				thumbnails {
+				  height
+				  url
+				  width
+				}
+				title
+			}
+		}
+		pageInfo {
+			hasNextPage
+			hasPreviousPage
+		}
+	}
+}

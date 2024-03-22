@@ -18,6 +18,12 @@ struct MapView: View {
         .frame(height: 300)
         .mapStyle(.standard(elevation: .automatic))
         .mapControlVisibility(.visible)
+        .onTapGesture {
+            let location = name.addingPercentEncoding(withAllowedCharacters: .alphanumerics)
+            let mapsUrl = "maps://?q=\(location!)&center=\(latitude),\(longitude)&z=18"
+            let url = URL(string: mapsUrl)
+            UIApplication.shared.open(url!)
+        }
     }
 }
 

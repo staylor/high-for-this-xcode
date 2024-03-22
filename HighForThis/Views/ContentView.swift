@@ -19,7 +19,7 @@ struct ContentView: View {
                     .tabItem {
                         Label("Podcast", systemImage: "mic.circle")
                     }
-                Videos()
+                VideoList()
                     .tabItem {
                         Label("Videos", systemImage: "video")
                     }

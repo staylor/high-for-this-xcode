@@ -1,43 +1,26 @@
 import SwiftUI
 import HighForThisAPI
+import CachedAsyncImage
 
 struct ArtistArtwork: View {
     var url: String
     var width: Int
     var height: Int
     @State private var isAnimating = false
-    @State private var blinking: Bool = false
     
     var body: some View {
-        AsyncImage(url: URL(string: resizedUrl())) { phase in
-            switch phase {
-            case .empty:
-                Stripes(config: StripesConfig(
-                    background: Color.gray.opacity(0.25),
-                    foreground: Color.black.opacity(0.55)
-                ))
-                    .frame(maxHeight: screenWidth)
-                    .opacity(blinking ? 0.3 : 1)
-                    .animation(.easeInOut(duration: 0.75).repeatForever(), value: blinking)
-                    .onAppear {
-                        blinking.toggle()
+        CachedAsyncImage(url: URL(string: resizedUrl())) { image in
+            image.resizable()
+                .aspectRatio(contentMode: .fit)
+                .ignoresSafeArea()
+                .opacity(isAnimating ? 1 : 0)
+                .onAppear() {
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        isAnimating = true
                     }
-            case .success(let image):
-                image.resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .ignoresSafeArea()
-                    .opacity(isAnimating ? 1 : 0)
-                    .onAppear() {
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            isAnimating = true
-                        }
-                    }
-            case .failure:
-                Image(systemName: "photo")
-                
-            @unknown default:
-                EmptyView()
-            }
+                }
+        } placeholder: {
+            ImageLoading().frame(maxHeight: screenWidth)
         }
     }
     

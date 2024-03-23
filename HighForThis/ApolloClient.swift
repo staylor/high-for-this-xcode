@@ -8,6 +8,8 @@ typealias ArtistData = HighForThisAPI.ArtistQuery.Data
 typealias ArtistShowNode = ArtistData.Shows.Edge.Node
 typealias PodcastListNode = HighForThisAPI.PodcastsQuery.Data.Podcasts.Edge.Node
 typealias PodcastData = HighForThisAPI.PodcastQuery.Data.Podcast
+typealias PostData = HighForThisAPI.PostQuery.Data.Post
+typealias PostListNode = HighForThisAPI.PostsQuery.Data.Posts.Edge.Node
 typealias ShowListNode = HighForThisAPI.ShowsQuery.Data.Shows.Edge.Node
 typealias ShowData = HighForThisAPI.ShowQuery.Data.Show
 typealias VenueData = HighForThisAPI.VenueQuery.Data
@@ -19,7 +21,7 @@ func getData<Query: GraphQLQuery>(_ query: Query, cachePolicy: CachePolicy = cac
     print("\(Query.operationName) is being fetched.")
     Network.shared.apollo.fetch(query: query, cachePolicy: cachePolicy) { result in
         switch result {
-        case.success(let graphQLResult):
+        case .success(let graphQLResult):
             completion(graphQLResult.data!);
         case .failure(let error):
             print("Query failed: \(error)")
@@ -72,6 +74,25 @@ func getPodcasts(completion: @escaping (([PodcastListNode]) -> ())) {
     getData(query) { data in
         var nodes = [PodcastListNode]()
         for edge in data.podcasts!.edges {
+            nodes.append(edge.node)
+        }
+        
+        completion(nodes);
+    }
+}
+
+func getPost(slug: String, completion: @escaping ((PostData) -> ())) {
+    let query = HighForThisAPI.PostQuery(slug: slug)
+    getData(query) { data in
+        completion(data.post!)
+    }
+}
+
+func getPosts(completion: @escaping (([PostListNode]) -> ())) {
+    let query = HighForThisAPI.PostsQuery()
+    getData(query) { data in
+        var nodes = [PostListNode]()
+        for edge in data.posts!.edges {
             nodes.append(edge.node)
         }
         

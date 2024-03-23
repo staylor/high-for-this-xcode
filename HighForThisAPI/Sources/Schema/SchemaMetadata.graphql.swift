@@ -45,8 +45,20 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "Show": return HighForThisAPI.Objects.Show
     case "AppleMusicData": return HighForThisAPI.Objects.AppleMusicData
     case "AppleMusicArtwork": return HighForThisAPI.Objects.AppleMusicArtwork
+    case "Post": return HighForThisAPI.Objects.Post
+    case "EditorState": return HighForThisAPI.Objects.EditorState
+    case "ElementNode": return HighForThisAPI.Objects.ElementNode
+    case "CodeNode": return HighForThisAPI.Objects.CodeNode
+    case "HeadingNode": return HighForThisAPI.Objects.HeadingNode
+    case "ImageNode": return HighForThisAPI.Objects.ImageNode
+    case "QuoteNode": return HighForThisAPI.Objects.QuoteNode
+    case "TextNode": return HighForThisAPI.Objects.TextNode
+    case "VideoNode": return HighForThisAPI.Objects.VideoNode
+    case "ImageUploadCrop": return HighForThisAPI.Objects.ImageUploadCrop
     case "PodcastConnection": return HighForThisAPI.Objects.PodcastConnection
     case "PodcastEdge": return HighForThisAPI.Objects.PodcastEdge
+    case "PostConnection": return HighForThisAPI.Objects.PostConnection
+    case "PostEdge": return HighForThisAPI.Objects.PostEdge
     default: return nil
     }
   }

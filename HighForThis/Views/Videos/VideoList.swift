@@ -57,9 +57,9 @@ struct VideoList: View {
                                         CachedAsyncImage(url: url) { image in
                                             image.resizable()
                                                 .aspectRatio(contentMode: .fit)
-                                                .frame(width: 100).mask(Rectangle().padding(.vertical, 8))
+                                                .frame(height: 100)
                                         }  placeholder: {
-                                            ImageLoading().frame(width: 100)
+                                            ImageLoading().frame(height: 100)
                                         }
                                     }
                                 }

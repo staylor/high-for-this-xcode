@@ -23,6 +23,10 @@ struct ContentView: View {
                     .tabItem {
                         Label("Videos", systemImage: "video")
                     }
+                PostList()
+                    .tabItem {
+                        Label("Posts", systemImage: "note.text")
+                    }
             }
         }
     }

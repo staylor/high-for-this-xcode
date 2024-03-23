@@ -7,7 +7,8 @@ public class VideosQuery: GraphQLQuery {
   public static let operationName: String = "Videos"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query Videos($after: String, $first: Int, $year: Int) { videos(after: $after, first: $first, year: $year) { __typename years edges { __typename cursor node { __typename dataId id slug thumbnails { __typename height url width } title } } pageInfo { __typename hasNextPage hasPreviousPage } } }"#
+      #"query Videos($after: String, $first: Int, $year: Int) { videos(after: $after, first: $first, year: $year) { __typename years edges { __typename cursor node { __typename ...Video_video } } pageInfo { __typename hasNextPage hasPreviousPage } } }"#,
+      fragments: [Video_video.self]
     ))
 
   public var after: GraphQLNullable<String>
@@ -91,11 +92,7 @@ public class VideosQuery: GraphQLQuery {
           public static var __parentType: ApolloAPI.ParentType { HighForThisAPI.Objects.Video }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
-            .field("dataId", String.self),
-            .field("id", HighForThisAPI.ObjID.self),
-            .field("slug", String.self),
-            .field("thumbnails", [Thumbnail].self),
-            .field("title", String.self),
+            .fragment(Video_video.self),
           ] }
 
           public var dataId: String { __data["dataId"] }
@@ -104,25 +101,14 @@ public class VideosQuery: GraphQLQuery {
           public var thumbnails: [Thumbnail] { __data["thumbnails"] }
           public var title: String { __data["title"] }
 
-          /// Videos.Edge.Node.Thumbnail
-          ///
-          /// Parent Type: `VideoThumbnail`
-          public struct Thumbnail: HighForThisAPI.SelectionSet {
+          public struct Fragments: FragmentContainer {
             public let __data: DataDict
             public init(_dataDict: DataDict) { __data = _dataDict }
 
-            public static var __parentType: ApolloAPI.ParentType { HighForThisAPI.Objects.VideoThumbnail }
-            public static var __selections: [ApolloAPI.Selection] { [
-              .field("__typename", String.self),
-              .field("height", Int.self),
-              .field("url", String.self),
-              .field("width", Int.self),
-            ] }
-
-            public var height: Int { __data["height"] }
-            public var url: String { __data["url"] }
-            public var width: Int { __data["width"] }
+            public var video_video: Video_video { _toFragment() }
           }
+
+          public typealias Thumbnail = Video_video.Thumbnail
         }
       }
 

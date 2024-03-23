@@ -8,15 +8,7 @@ query Videos(
 		edges {
 			cursor
 			node {
-				dataId
-				id
-				slug
-				thumbnails {
-				  height
-				  url
-				  width
-				}
-				title
+				...Video_video
 			}
 		}
 		pageInfo {

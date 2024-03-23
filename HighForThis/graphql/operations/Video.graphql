@@ -1,13 +1,5 @@
 query Video($slug: String!) {
     video(slug: $slug) {
-        dataId
-        id
-        slug
-        thumbnails {
-            height
-            url
-            width
-        }
-        title
+        ...Video_video
     }
 }

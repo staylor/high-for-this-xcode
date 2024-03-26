@@ -51,6 +51,7 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "CodeNode": return HighForThisAPI.Objects.CodeNode
     case "HeadingNode": return HighForThisAPI.Objects.HeadingNode
     case "ImageNode": return HighForThisAPI.Objects.ImageNode
+    case "LinebreakNode": return HighForThisAPI.Objects.LinebreakNode
     case "QuoteNode": return HighForThisAPI.Objects.QuoteNode
     case "TextNode": return HighForThisAPI.Objects.TextNode
     case "VideoNode": return HighForThisAPI.Objects.VideoNode

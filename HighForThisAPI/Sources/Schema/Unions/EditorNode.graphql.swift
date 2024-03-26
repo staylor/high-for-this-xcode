@@ -11,6 +11,7 @@ public extension Unions {
       Objects.ElementNode.self,
       Objects.HeadingNode.self,
       Objects.ImageNode.self,
+      Objects.LinebreakNode.self,
       Objects.QuoteNode.self,
       Objects.TextNode.self,
       Objects.VideoNode.self

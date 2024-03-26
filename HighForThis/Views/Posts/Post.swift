@@ -56,5 +56,5 @@ struct Post: View {
 }
 
 #Preview {
-    Post(slug: "best-albums-of-2023")
+    Post(slug: "best-albums-of-2013")
 }

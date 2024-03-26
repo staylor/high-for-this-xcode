@@ -12,6 +12,7 @@ query Post($slug: String!) {
                     }
                     ... on HeadingNode {
                         children {
+                            ...TextNodes_linebreakNode
                             ...TextNodes_textNode
                         }
                         tag
@@ -34,6 +35,7 @@ query Post($slug: String!) {
                     }
                     ... on ElementNode {
                         children {
+                            ...TextNodes_linebreakNode
                             ...TextNodes_textNode
                         }
                     }

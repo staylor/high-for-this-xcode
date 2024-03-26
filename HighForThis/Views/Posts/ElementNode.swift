@@ -9,6 +9,9 @@ struct ElementNode: View {
         case "paragraph":
             TextBlock {
                 node.children!.map {
+                    if $0!.__typename == "LinebreakNode" {
+                        return Text("\n")
+                    }
                     let node = $0!.asTextNode!
                     let v = Text(node.text!)
                     return formatText(view: v, format: node.format!)
